@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "80577268148",
+    "firebase_url": "https://minyawy-94af8.firebaseio.com",
+    "project_id": "minyawy-94af8",
+    "storage_bucket": "minyawy-94af8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80577268148:android:654785c2e5ec0567b34ae1",
+        "android_client_info": {
+          "package_name": "com.example.minyawy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80577268148-9luhsrscqastag3i9hgedsgjkrusgq0t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.minyawy",
+            "certificate_hash": "67d774b1b6f16199e41c7127ac772f6622622dff"
+          }
+        },
+        {
+          "client_id": "80577268148-n3roppq1vmfhg54f6vav5bonkb52bhmc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDOehRdkihbCPoGCZGyH9FofiHYiGq4CU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80577268148-n3roppq1vmfhg54f6vav5bonkb52bhmc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
