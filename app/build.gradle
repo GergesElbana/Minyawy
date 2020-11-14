@@ -7,7 +7,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.minyawy"
-        minSdkVersion 18
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -30,23 +30,25 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    //dependancy for all matrial design
+    //dependency for all matrial design
     implementation 'com.google.android.material:material:1.1.0'
-    // dependancy for size "sdp"
+    // dependency for size "sdp"
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
-    // dependance for circl image
+    // dependency for circle image
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     // Import the Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:26.1.0')
     // Add the dependency for the Firebase SDK for Google Analytics
     // When using the BoM, don't specify versions in Firebase dependencies
     implementation 'com.google.firebase:firebase-analytics'
-
     // Declare the dependency for the Realtime Database library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-database'
     // Declare the dependency for the Cloud Storage library
     implementation 'com.google.firebase:firebase-storage'
+    //butter knife dependency
+    implementation 'com.jakewharton:butterknife:10.2.3'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
 
 }
-apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.gms.google-services'
