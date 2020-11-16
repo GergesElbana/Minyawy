@@ -11,6 +11,7 @@ import butterknife.ButterKnife;
 
 public class RestaurantDescription extends AppCompatActivity {
 
+
     @BindView(R.id.ReataurateImage)
     ImageView ReataurateImage;
     @BindView(R.id.RestaurantName)
@@ -22,7 +23,7 @@ public class RestaurantDescription extends AppCompatActivity {
         setContentView(R.layout.activity_restaurant_description);
         ButterKnife.bind(this);
 
-        RestaurantName.setTitle("Koshary Nahla");
+        RestaurantName.setTitle("Koshary gerges");
         setSupportActionBar(RestaurantName);
 
 

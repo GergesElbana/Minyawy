@@ -48,8 +48,9 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <LinearLayout
+            android:id="@+id/lin1"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
@@ -58,7 +59,7 @@
             android:layout_marginEnd="@dimen/_35sdp"
             android:layout_marginTop="@dimen/_30sdp"
             android:layoutDirection="rtl"
-            android:text="نهلة كشرى احلا طعم نظافه ريحه توفير "
+            android:text="جرجس كشرى احلا طعم نظافه ريحه توفير : "
             android:textSize="22sp"
             android:textColor="@color/colorAccent"
             android:id="@+id/RestaurantCaption"/>
@@ -72,10 +73,68 @@
                   android:layout_marginStart="@dimen/_25sdp"
                   android:layout_marginEnd="@dimen/_25sdp"
                 />
+            <LinearLayout
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
+                    android:textSize="32sp"
+                    android:textColor="@color/colorAccent"
+                    android:layoutDirection="rtl"
+                    android:text="  معلومات  "
+                    android:drawableStart="@drawable/ic_stars"
+                    />
+
+
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_20sdp"
+                android:background="@color/colorPrimaryDark">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:layoutDirection="rtl"
+                    android:text="شارع طه حسين امام توكيل قوطنيل :"
+                    android:textSize="22sp"
+                    android:textColor="@color/colorAccent"
+                    android:padding="@dimen/_5sdp"
+                    />
+
+            </androidx.cardview.widget.CardView>
+                <androidx.cardview.widget.CardView
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/_20sdp"
+                    android:background="@color/colorPrimaryDark"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_10sdp"
+                        android:layout_marginEnd="@dimen/_35sdp"
+                        android:layout_marginTop="@dimen/_30sdp"
+                        android:drawableEnd="@drawable/ic_call"
+                        android:text="01279751313 "
+                        android:textStyle="normal"
+                        android:textSize="22sp"
+                        android:textColor="@color/colorAccent"
+                        android:padding="@dimen/_5sdp"
+
+                        />
+                </androidx.cardview.widget.CardView>
         </LinearLayout>
-
-
 
     </androidx.core.widget.NestedScrollView>
 
