@@ -6,15 +6,29 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+    <com.denzcoskun.imageslider.ImageSlider
+        android:id="@+id/Slider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_180sdp"
+        app:iss_auto_cycle="true"
+        app:iss_period="1000"
+        app:iss_delay="0"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/PlaceRecycler"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_250sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginTop="356dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="horizontal"/>
-
+        app:layout_constraintTop_toTopOf="@id/Slider" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestViewholder> {
-    ArrayList<Place_Model> places;
+    ArrayList<Place_Model> places=new ArrayList<>();
     Context context;
 
     public RecyclerAdapter(ArrayList<Place_Model> places, Context context) {
@@ -30,8 +30,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
 
     public RestViewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.home_cardview,parent,false);
+
         RestViewholder restViewholder= new RestViewholder(view);
         return restViewholder;
+
     }
 
     @Override
@@ -39,6 +41,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
 
         holder.placeName.setText(places.get(position).name);
         holder.placeLogo.setImageResource(places.get(position).photo);
+
     }
 
     @Override
@@ -62,6 +65,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
             homcard=(CardView)itemView.findViewById(R.id.HomeCard);
             placeName=(TextView)itemView.findViewById(R.id.RestNameText);
             placeLogo=(ImageView)itemView.findViewById(R.id.RestLogo);
+
         }
     }
 
