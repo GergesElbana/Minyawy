@@ -1,6 +1,7 @@
 package com.example.minyawy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.Image;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,7 +42,17 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
 
         holder.placeName.setText(places.get(position).name);
         holder.placeLogo.setImageResource(places.get(position).photo);
+        holder.homcard.setOnClickListener(new View.OnClickListener() {
 
+
+            @Override
+            public void onClick(View view) {
+                //
+                Intent nn=new Intent(context,PlaceListActivity.class);
+                context.startActivity(nn);
+
+            }
+        });
     }
 
     @Override

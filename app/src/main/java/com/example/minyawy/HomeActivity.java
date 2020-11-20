@@ -6,8 +6,10 @@ import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 
@@ -32,6 +34,7 @@ public class HomeActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
+
         int imageslider[]={R.drawable.download,R.drawable.rest};
         for(int imegs:imageslider){
             ImageFlipper(imegs);
@@ -48,10 +51,29 @@ public class HomeActivity extends AppCompatActivity {
         place.add(new Place_Model("Restaurant", R.drawable.rest));
         place.add(new Place_Model("Cafe", R.drawable.ger));
         place.add(new Place_Model("Pharmacy", R.drawable.download));
+        place.add(new Place_Model("Pharmacy", R.drawable.download));
+        place.add(new Place_Model("Restaurant", R.drawable.rest));
+        place.add(new Place_Model("Cafe", R.drawable.ger));
+        place.add(new Place_Model("Pharmacy", R.drawable.download));
+        place.add(new Place_Model("Restaurant", R.drawable.rest));
+        place.add(new Place_Model("Cafe", R.drawable.ger));
+        place.add(new Place_Model("Pharmacy", R.drawable.download));
+        place.add(new Place_Model("Pharmacy", R.drawable.download));
+        place.add(new Place_Model("Restaurant", R.drawable.rest));
+        place.add(new Place_Model("Cafe", R.drawable.ger));
+        place.add(new Place_Model("Pharmacy", R.drawable.download));
         RecyclerAdapter adapter = new RecyclerAdapter(place, context);
+
         //  LinearLayoutManager LayoutManager=new LinearLayoutManager(context);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
+       RecyclerView.LayoutManager layoutManager=new StaggeredGridLayoutManager(2,
+               StaggeredGridLayoutManager.VERTICAL);
+              recyclerView.setLayoutManager(layoutManager);
+              recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
+       // recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
         recyclerView.setAdapter(adapter);
+
 
     }
      public void ImageFlipper(int image){

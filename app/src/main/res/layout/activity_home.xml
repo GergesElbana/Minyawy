@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".HomeActivity">
 
+   
+
     <ViewFlipper
         android:id="@+id/Slider"
         android:layout_width="match_parent"
@@ -20,11 +22,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/PlaceRecycler"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_140sdp"
-        android:layout_marginTop="300dp"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="235dp"
+
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/Slider" />
 
