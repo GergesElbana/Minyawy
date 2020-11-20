@@ -18,6 +18,7 @@ public class PlaceListActivity extends AppCompatActivity {
 
     @BindView(R.id.PlaceList)
     RecyclerView PlaceRecycler;
+    Places_Adapter adapter;
 
     private Context context;
     private List<ItemPlaceModel> placesList;
@@ -47,7 +48,7 @@ public class PlaceListActivity extends AppCompatActivity {
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
         PlaceRecycler.setLayoutManager(linearLayoutManager);
-        Places_Adapter adapter =new Places_Adapter(placesList);
+        Places_Adapter adapter =new Places_Adapter(placesList,this);
         PlaceRecycler.setAdapter(adapter);
 
 

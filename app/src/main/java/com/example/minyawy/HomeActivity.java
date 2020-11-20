@@ -2,17 +2,14 @@ package com.example.minyawy;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager.widget.ViewPager;
-
-import com.denzcoskun.imageslider.ImageSlider;
-import com.denzcoskun.imageslider.models.SlideModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,35 +20,26 @@ public class HomeActivity extends AppCompatActivity {
     ArrayList<Place_Model> place;
 
 
-
     @BindView(R.id.PlaceRecycler)
     RecyclerView PlaceRecycler;
+    @BindView(R.id.Slider)
+    ViewFlipper Slider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
-        ImageSlider HomeSlider=(ImageSlider)findViewById(R.id.Slider);
-/*
-      //  slideModels.add(new SlideModel()
-        slideModels.add(new SlideModel("https://unsplash.com/photos/S9OCBwRFV_k","img2"));
-        slideModels.add(new SlideModel("https://unsplash.com/photos/S9OCBwRFV_k","img3"));
 
 
-        HomeSlider.setImageList(slideModels,true);*/
+        int imageslider[]={R.drawable.download,R.drawable.rest};
+        for(int imegs:imageslider){
+            ImageFlipper(imegs);
 
-
-
-
-
-
-
+        }
 
         recyclerView = findViewById(R.id.PlaceRecycler);
-        //initdata();
         ArrayList<Place_Model> place = new ArrayList<>();
-
         place.add(new Place_Model("Cafe", R.drawable.ger));
         place.add(new Place_Model("Pharmacy", R.drawable.download));
         place.add(new Place_Model("Restaurant", R.drawable.rest));
@@ -66,7 +54,15 @@ public class HomeActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
     }
-
+     public void ImageFlipper(int image){
+         ImageView imageView=new ImageView(this);
+         imageView.setBackgroundResource(image);
+         Slider.addView(imageView);
+         Slider.setFlipInterval(4000);
+         Slider.setAutoStart(true);
+         Slider.setInAnimation(this,android.R.anim.slide_in_left);
+         Slider.setOutAnimation(this,android.R.anim.slide_out_right);
+     }
   /*  private void initdata(){
         place=new ArrayList<>();
         place.add(new Place_Model("Restaurant",R.drawable.rest));
