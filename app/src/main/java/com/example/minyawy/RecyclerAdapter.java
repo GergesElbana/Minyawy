@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -40,8 +41,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
     @Override
     public void onBindViewHolder(@NonNull RestViewholder holder, int position) {
 
-        holder.placeName.setText(places.get(position).name);
-        holder.placeLogo.setImageResource(places.get(position).photo);
+        holder.placeName.setText(places.get(position).getName());
+        holder.placeLogo.setImageResource(places.get(position).getPhoto());
         holder.homcard.setOnClickListener(new View.OnClickListener() {
 
 

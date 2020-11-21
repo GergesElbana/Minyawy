@@ -6,12 +6,17 @@ import android.widget.ImageView;
 import android.widget.ViewFlipper;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.models.SlideModel;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,11 +26,11 @@ public class HomeActivity extends AppCompatActivity {
     Context context;
     ArrayList<Place_Model> place;
 
-
+    Toolbar toolbar;
     @BindView(R.id.PlaceRecycler)
     RecyclerView PlaceRecycler;
-    @BindView(R.id.Slider)
-    ViewFlipper Slider;
+  //  @BindView(R.id.Slider)
+   // ViewFlipper Slider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,13 +38,20 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
+        toolbar=findViewById(R.id.tool_Bar);
+        setSupportActionBar(toolbar);
 
+        ImageSlider imageSlider=findViewById(R.id.Slider);
+        List<SlideModel> slideModels=new ArrayList<>();
+        slideModels.add(new SlideModel(R.drawable.ger,null));
+        slideModels.add(new SlideModel(R.drawable.rest,null));
+        imageSlider.setImageList(slideModels,true);
 
-        int imageslider[]={R.drawable.download,R.drawable.rest};
+       /* int imageslider[]={R.drawable.download,R.drawable.rest};
         for(int imegs:imageslider){
             ImageFlipper(imegs);
 
-        }
+        }*/
 
         recyclerView = findViewById(R.id.PlaceRecycler);
         ArrayList<Place_Model> place = new ArrayList<>();
@@ -62,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
         place.add(new Place_Model("Restaurant", R.drawable.rest));
         place.add(new Place_Model("Cafe", R.drawable.ger));
         place.add(new Place_Model("Pharmacy", R.drawable.download));
-        RecyclerAdapter adapter = new RecyclerAdapter(place, context);
+        RecyclerAdapter adapter = new RecyclerAdapter(place, this);
 
         //  LinearLayoutManager LayoutManager=new LinearLayoutManager(context);
        RecyclerView.LayoutManager layoutManager=new StaggeredGridLayoutManager(2,
@@ -76,7 +88,7 @@ public class HomeActivity extends AppCompatActivity {
 
 
     }
-     public void ImageFlipper(int image){
+    /* public void ImageFlipper(int image){
          ImageView imageView=new ImageView(this);
          imageView.setBackgroundResource(image);
          Slider.addView(imageView);
@@ -84,7 +96,7 @@ public class HomeActivity extends AppCompatActivity {
          Slider.setAutoStart(true);
          Slider.setInAnimation(this,android.R.anim.slide_in_left);
          Slider.setOutAnimation(this,android.R.anim.slide_out_right);
-     }
+     }*/
   /*  private void initdata(){
         place=new ArrayList<>();
         place.add(new Place_Model("Restaurant",R.drawable.rest));

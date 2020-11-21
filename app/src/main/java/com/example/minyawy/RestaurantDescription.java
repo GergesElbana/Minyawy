@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -45,9 +46,13 @@ public class RestaurantDescription extends AppCompatActivity {
                 Intent call = new Intent(Intent.ACTION_CALL);
                 call.setData(Uri.parse("tel:"+ numb));
                 startActivity(call);
+
+
             }
         });
 
 
     }
+
+
 }

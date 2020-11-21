@@ -30,21 +30,21 @@ public class PlaceListActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         placesList=new ArrayList<>();
-        placesList.add(new ItemPlaceModel("نهولة","نونه كشري احلا طعم",R.drawable.download));
-        placesList.add(new ItemPlaceModel("نهولة","نونه كشري احلا طعم",R.drawable.rest));
-        placesList.add(new ItemPlaceModel("نهولة","نونه كشري احلا طعم",R.drawable.download));
-        placesList.add(new ItemPlaceModel("نهولة","نونه كشري احلا طعم",R.drawable.rest));
-        placesList.add(new ItemPlaceModel("ملاكي","نونه كشري احلا طعم",R.drawable.ger));
-        placesList.add(new ItemPlaceModel("نهولة","نونه كشري احلا طعم",R.drawable.download));
-        placesList.add(new ItemPlaceModel("نهولة","نونه كشري احلا طعم",R.drawable.rest));
-        placesList.add(new ItemPlaceModel("نهولة","نونه كشري احلا طعم",R.drawable.download));
-        placesList.add(new ItemPlaceModel("نهولة","نونه كشري احلا طعم",R.drawable.rest));
-        placesList.add(new ItemPlaceModel("ملاكي","نونه كشري احلا طعم",R.drawable.ger));
-        placesList.add(new ItemPlaceModel("نهولة","نونه كشري احلا طعم",R.drawable.download));
-        placesList.add(new ItemPlaceModel("نهولة","نونه كشري احلا طعم",R.drawable.rest));
-        placesList.add(new ItemPlaceModel("نهولة","نونه كشري احلا طعم",R.drawable.download));
-        placesList.add(new ItemPlaceModel("نهولة","نونه كشري احلا طعم",R.drawable.rest));
-        placesList.add(new ItemPlaceModel("ملاكي","نونه كشري احلا طعم",R.drawable.ger));
+        placesList.add(new ItemPlaceModel("بندقة"," كشري ",R.drawable.download));
+        placesList.add(new ItemPlaceModel("ست الشام","اكل سوري",R.drawable.rest));
+        placesList.add(new ItemPlaceModel("نيوكوليتي","ايس كريم",R.drawable.ger));
+        placesList.add(new ItemPlaceModel("بندقة"," كشري ",R.drawable.download));
+        placesList.add(new ItemPlaceModel("ست الشام","اكل سوري",R.drawable.rest));
+        placesList.add(new ItemPlaceModel("نيوكوليتي","ايس كريم",R.drawable.ger));
+        placesList.add(new ItemPlaceModel("بندقة"," كشري ",R.drawable.download));
+        placesList.add(new ItemPlaceModel("ست الشام","اكل سوري",R.drawable.rest));
+        placesList.add(new ItemPlaceModel("نيوكوليتي","ايس كريم",R.drawable.ger));
+        placesList.add(new ItemPlaceModel("بندقة"," كشري ",R.drawable.download));
+        placesList.add(new ItemPlaceModel("ست الشام","اكل سوري",R.drawable.rest));
+        placesList.add(new ItemPlaceModel("نيوكوليتي","ايس كريم",R.drawable.ger));
+        placesList.add(new ItemPlaceModel("بندقة"," كشري ",R.drawable.download));
+        placesList.add(new ItemPlaceModel("ست الشام","اكل سوري",R.drawable.rest));
+        placesList.add(new ItemPlaceModel("نيوكوليتي","ايس كريم",R.drawable.ger));
 
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
         PlaceRecycler.setLayoutManager(linearLayoutManager);
