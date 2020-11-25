@@ -3,15 +3,26 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:id="@+id/tool_Bar">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tool_Bar"
+
+   >
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        app:cardCornerRadius="@dimen/_10sdp"
+      >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="منياوي"
-        android:layout_marginStart="@dimen/_125sdp"
+       android:layout_gravity="center"
         android:textColor="@color/colorAccent"
-        android:textSize="20sp"
+        android:textSize="25sp"
+        android:gravity="center"
         />
+    </androidx.cardview.widget.CardView>
 
 </androidx.appcompat.widget.Toolbar>

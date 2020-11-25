@@ -17,15 +17,17 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolder> {
-    List<ItemPlaceModel> placeitem;
+    List<FechData> fechDataList;
     Activity activity;
    Context context0;
    int lastPosition=-1;
-    public Places_Adapter(List<ItemPlaceModel> placeitem ,Activity activity) {
-        this.placeitem = placeitem;
+    public Places_Adapter(List<FechData> fechDataList ,Activity activity) {
+        this.fechDataList = fechDataList;
         this.activity=activity;
     }
 
@@ -39,9 +41,15 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
 
     @Override
     public void onBindViewHolder(@NonNull viwHolder holder, final int position) {
-        holder.placeName.setText(placeitem.get(position).getPlaceName());
-        holder.placedesc.setText(placeitem.get(position).getPlaceDes());
-        holder.placephoto.setImageResource(placeitem.get(position).getItemPlacePhoto());
+
+      /*  viwHolder viwHolder=(viwHolder)holder;
+        FechData fechData=fechDataList.get(position);
+        viwHolder.placeName.setText(fechData.getPlaceName());
+        viwHolder.placedesc.setText(fechData.location);*/
+        holder.placeName.setText(fechDataList.get(position).getPlaceName());
+        holder.placedesc.setText(fechDataList.get(position).location);
+        Glide.with(context0).load(fechDataList.get(position).getLogo()).into(holder.placephoto);
+
 
         setAnimation(holder.card,position);
        holder.card.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +80,7 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
 
     @Override
     public int getItemCount() {
-        return placeitem.size();
+        return fechDataList.size();
     }
 
     public class viwHolder extends RecyclerView.ViewHolder {

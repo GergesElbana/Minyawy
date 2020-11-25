@@ -21,6 +21,7 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestViewholder> {
     ArrayList<Place_Model> places=new ArrayList<>();
     Context context;
+  //  TextView placeName;
 
     public RecyclerAdapter(ArrayList<Place_Model> places, Context context) {
         this.places = places;
@@ -39,7 +40,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RestViewholder holder, int position) {
+    public void onBindViewHolder(@NonNull final RestViewholder holder, int position) {
 
         holder.placeName.setText(places.get(position).getName());
         holder.placeLogo.setImageResource(places.get(position).getPhoto());
@@ -48,9 +49,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
 
             @Override
             public void onClick(View view) {
-                //
-                Intent nn=new Intent(context,PlaceListActivity.class);
-                context.startActivity(nn);
+
+                String placenametext=holder.placeName.getText().toString();
+                if (placenametext.equals("Cafe"))
+                {
+                    Intent nona=new Intent(context,PlaceListActivity.class);
+                    context.startActivity(nona);
+                }
+
+
+
 
             }
         });
@@ -68,10 +76,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
     }
 
     public class RestViewholder extends RecyclerView.ViewHolder {
-        TextView placeName;
+
         ImageView placeLogo;
         CardView homcard;
-
+       TextView placeName;
         public RestViewholder(@NonNull View itemView) {
             super(itemView);
             homcard=(CardView)itemView.findViewById(R.id.HomeCard);
