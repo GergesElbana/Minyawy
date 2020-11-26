@@ -22,11 +22,11 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolder> {
-    List<FechData> fechDataList;
+    List<FetchPlaceName> fechDataList;
     Activity activity;
    Context context0;
    int lastPosition=-1;
-    public Places_Adapter(List<FechData> fechDataList ,Activity activity) {
+    public Places_Adapter(List<FetchPlaceName> fechDataList ,Activity activity) {
         this.fechDataList = fechDataList;
         this.activity=activity;
     }
@@ -47,8 +47,11 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
         viwHolder.placeName.setText(fechData.getPlaceName());
         viwHolder.placedesc.setText(fechData.location);*/
         holder.placeName.setText(fechDataList.get(position).getPlaceName());
-        holder.placedesc.setText(fechDataList.get(position).location);
-        Glide.with(context0).load(fechDataList.get(position).getLogo()).into(holder.placephoto);
+        holder.placedesc.setText(fechDataList.get(position).getPlaceDescrip());
+       Glide.with(activity)
+               .load(fechDataList.get(position)
+                       .getLogo()).into(holder.placephoto);
+
 
 
         setAnimation(holder.card,position);
@@ -57,7 +60,7 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
 
             @Override
             public void onClick(View view) {
-          //
+
                Intent ih=new Intent(activity,RestaurantDescription.class);
                activity.startActivity(ih);
 

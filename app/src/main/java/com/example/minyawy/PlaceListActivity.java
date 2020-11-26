@@ -13,6 +13,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -26,71 +27,81 @@ public class PlaceListActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private Places_Adapter places_adapter;
-    Activity activity;
+
 
     @BindView(R.id.PlaceList)
     RecyclerView PlaceRecycler;
-    Places_Adapter adapter;
+
 
     private Context context;
-    private List<FechData> placesList;
+    private List<FetchPlaceName> placesListData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_place_list);
         ButterKnife.bind(this);
-        firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference("Restaurant");
-
-      /*  placesList=new ArrayList<>();
-        placesList.add(new ItemPlaceModel("بندقة"," كشري ",R.drawable.download));
-        placesList.add(new ItemPlaceModel("ست الشام","اكل سوري",R.drawable.rest));
-        placesList.add(new ItemPlaceModel("نيوكوليتي","ايس كريم",R.drawable.ger));
-        placesList.add(new ItemPlaceModel("بندقة"," كشري ",R.drawable.download));
-        placesList.add(new ItemPlaceModel("ست الشام","اكل سوري",R.drawable.rest));
-        placesList.add(new ItemPlaceModel("نيوكوليتي","ايس كريم",R.drawable.ger));
-        placesList.add(new ItemPlaceModel("بندقة"," كشري ",R.drawable.download));
-        placesList.add(new ItemPlaceModel("ست الشام","اكل سوري",R.drawable.rest));
-        placesList.add(new ItemPlaceModel("نيوكوليتي","ايس كريم",R.drawable.ger));
-        placesList.add(new ItemPlaceModel("بندقة"," كشري ",R.drawable.download));
-        placesList.add(new ItemPlaceModel("ست الشام","اكل سوري",R.drawable.rest));
-        placesList.add(new ItemPlaceModel("نيوكوليتي","ايس كريم",R.drawable.ger));
-        placesList.add(new ItemPlaceModel("بندقة"," كشري ",R.drawable.download));
-        placesList.add(new ItemPlaceModel("ست الشام","اكل سوري",R.drawable.rest));
-        placesList.add(new ItemPlaceModel("نيوكوليتي","ايس كريم",R.drawable.ger));
-
-        LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
+      LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
         PlaceRecycler.setLayoutManager(linearLayoutManager);
-        Places_Adapter adapter =new Places_Adapter(placesList,this);
-        PlaceRecycler.setAdapter(adapter);*/
+
+     //   firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference=FirebaseDatabase.getInstance().getReference();
 
 
-    }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                placesList = new ArrayList<>();
+        placesListData=new ArrayList<>();
+        clearData();
+        getfirebasedata();
 
-                for (DataSnapshot dataSnapshot1 : snapshot.getChildren()) {
-                    FechData fechDataL = dataSnapshot1.getValue(FechData.class);
-                    placesList.add(fechDataL);
+  }
 
-                }
-                places_adapter = new Places_Adapter(placesList, PlaceListActivity.this);
-                PlaceRecycler.setAdapter(places_adapter);
+
+
+
+private void getfirebasedata(){
+
+    Query query=databaseReference.child("Restaurant");
+    query.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(@NonNull DataSnapshot snapshot) {
+            clearData();
+            for(DataSnapshot data:snapshot.getChildren()){
+             FetchPlaceName fetchPlaceName=new FetchPlaceName();
+             fetchPlaceName.setPlaceName(data.child("name").getValue().toString());
+                fetchPlaceName.setPlaceDescrip(data.child("location").getValue().toString());
+                fetchPlaceName.setLogo(data.child("logo").getValue().toString());
+                placesListData.add(fetchPlaceName);
+
+            }
+            places_adapter = new Places_Adapter(placesListData, PlaceListActivity.this);
+            PlaceRecycler.setAdapter(places_adapter);
+            places_adapter.notifyDataSetChanged();
+        }
+
+        @Override
+        public void onCancelled(@NonNull DatabaseError error) {
+
+        }
+    });
+}
+private void clearData(){
+        if(placesListData!=null){
+            placesListData.clear();
+            if (places_adapter!=null){
+                places_adapter.notifyDataSetChanged();
+
 
             }
 
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+            placesListData=new ArrayList<>();
 
-            }
-        });
-    }}
+
+
+
+
+}
+
+}

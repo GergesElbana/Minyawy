@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
 
         ImageSlider imageSlider=findViewById(R.id.Slider);
         List<SlideModel> slideModels=new ArrayList<>();
-        slideModels.add(new SlideModel(R.drawable.ger,null));
+        slideModels.add(new SlideModel(R.drawable.rest,null));
         slideModels.add(new SlideModel(R.drawable.rest,null));
         imageSlider.setImageList(slideModels,true);
 
@@ -55,25 +55,17 @@ public class HomeActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.PlaceRecycler);
         ArrayList<Place_Model> place = new ArrayList<>();
-        place.add(new Place_Model("Cafe", R.drawable.ger));
-        place.add(new Place_Model("Pharmacy", R.drawable.download));
-        place.add(new Place_Model("Restaurant", R.drawable.rest));
-        place.add(new Place_Model("Cafe", R.drawable.ger));
-        place.add(new Place_Model("Pharmacy", R.drawable.download));
-        place.add(new Place_Model("Restaurant", R.drawable.rest));
-        place.add(new Place_Model("Cafe", R.drawable.ger));
-        place.add(new Place_Model("Pharmacy", R.drawable.download));
-        place.add(new Place_Model("Pharmacy", R.drawable.download));
-        place.add(new Place_Model("Restaurant", R.drawable.rest));
-        place.add(new Place_Model("Cafe", R.drawable.ger));
-        place.add(new Place_Model("Pharmacy", R.drawable.download));
-        place.add(new Place_Model("Restaurant", R.drawable.rest));
-        place.add(new Place_Model("Cafe", R.drawable.ger));
-        place.add(new Place_Model("Pharmacy", R.drawable.download));
-        place.add(new Place_Model("Pharmacy", R.drawable.download));
-        place.add(new Place_Model("Restaurant", R.drawable.rest));
-        place.add(new Place_Model("Cafe", R.drawable.ger));
-        place.add(new Place_Model("Pharmacy", R.drawable.download));
+        place.add(new Place_Model("Cafe", R.drawable.cafe));
+        place.add(new Place_Model("Pharmacy", R.drawable.pharmacy));
+        place.add(new Place_Model("Restaurant", R.drawable.restaurant));
+        place.add(new Place_Model("bank", R.drawable.bank));
+        place.add(new Place_Model("clothes", R.drawable.clothes));
+        place.add(new Place_Model("hotel", R.drawable.hotel));
+        place.add(new Place_Model("hospital", R.drawable.hospital));
+        place.add(new Place_Model("Men_Suit", R.drawable.men_suit));
+        place.add(new Place_Model("souvenirs", R.drawable.sovener));
+        place.add(new Place_Model("bread", R.drawable.bread));
+
         RecyclerAdapter adapter = new RecyclerAdapter(place, this);
 
         //  LinearLayoutManager LayoutManager=new LinearLayoutManager(context);
