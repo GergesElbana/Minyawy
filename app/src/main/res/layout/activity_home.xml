@@ -11,7 +11,7 @@
         android:id="@+id/include2"
         layout="@layout/appbar" />
 
-    <com.denzcoskun.imageslider.ImageSlider
+  <!--  <com.denzcoskun.imageslider.ImageSlider
         android:id="@+id/Slider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_140sdp"
@@ -25,7 +25,7 @@
         android:layout_margin="@dimen/_5sdp"
         app:layout_constraintTop_toBottomOf="@+id/include2"/>
 
-   <!-- <ViewFlipper
+   <ViewFlipper
         android:id="@+id/Slider"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_140sdp"
@@ -34,7 +34,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include2" />-->
+        app:layout_constraintTop_toBottomOf="@+id/include2" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/PlaceRecycler"
@@ -45,7 +45,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/Slider" />
+        app:layout_constraintTop_toTopOf="@id/Slider" />-->
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
@@ -58,11 +59,24 @@
         android:id="@+id/navibotton"
         app:itemIconTint="@color/colorAccent"
         app:menu="@menu/menu"
+
+        android:background="?android:attr/windowBackground"
         >
 
 
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="617dp"
+        android:id="@+id/Frag_container"
+        app:layout_constraintBottom_toTopOf="@+id/navibotton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include2">
+
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

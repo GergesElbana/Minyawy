@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomeFragment">
+
+
+
+    <com.denzcoskun.imageslider.ImageSlider
+        android:id="@+id/Slider"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_140sdp"
+        app:auto_cycle="true"
+        app:placeholder="@drawable/ger"
+        app:error_image="@drawable/rest"
+        app:delay="0"
+        app:period="2000"
+        app:corner_radius="5"
+        android:padding="@dimen/_10sdp"
+        android:layout_margin="@dimen/_5sdp"
+        app:layout_constraintTop_toBottomOf="@+id/include2"/>
+
+    <!-- <ViewFlipper
+         android:id="@+id/Slider"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/_140sdp"
+         android:fitsSystemWindows="true"
+         android:padding="@dimen/_10sdp"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.0"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toBottomOf="@+id/include2" />-->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/PlaceRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="215dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/Slider" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

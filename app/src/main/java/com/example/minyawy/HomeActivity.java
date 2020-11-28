@@ -1,12 +1,14 @@
 package com.example.minyawy;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
@@ -27,8 +29,7 @@ public class HomeActivity extends AppCompatActivity {
     ArrayList<Place_Model> place;
 
     Toolbar toolbar;
-    @BindView(R.id.PlaceRecycler)
-    RecyclerView PlaceRecycler;
+
     @BindView(R.id.navibotton)
     BottomNavigationView navibotton;
     //  @BindView(R.id.Slider)
@@ -40,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
-        toolbar = findViewById(R.id.tool_Bar);
+     /*   toolbar = findViewById(R.id.tool_Bar);
         setSupportActionBar(toolbar);
 
         ImageSlider imageSlider = findViewById(R.id.Slider);
@@ -55,7 +56,7 @@ public class HomeActivity extends AppCompatActivity {
 
         }*/
 
-        recyclerView = findViewById(R.id.PlaceRecycler);
+       /* recyclerView = findViewById(R.id.PlaceRecycler);
         ArrayList<Place_Model> place = new ArrayList<>();
         place.add(new Place_Model("Cafe", R.drawable.cafe));
         place.add(new Place_Model("Pharmacy", R.drawable.pharmacy));
@@ -78,18 +79,27 @@ public class HomeActivity extends AppCompatActivity {
 
 
         // recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, true));
-        recyclerView.setAdapter(adapter);
-
+        recyclerView.setAdapter(adapter);*/
+        getSupportFragmentManager().beginTransaction().replace(R.id.Frag_container, new HomeFragment()).commit();
 
         navibotton.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Fragment selectedFragment=null;
                 switch (item.getItemId()){
-                 case   R.id.profile:
-
+                 case   R.id.home:
+                     selectedFragment =new HomeFragment();
+                     break;
+                    case   R.id.notification:
+                        selectedFragment=new NotificationFragment();
+                     break;
+                    case   R.id.profile:
+                        selectedFragment=new ProfileFragment();
+                        break;
 
 
                 }
+                getSupportFragmentManager().beginTransaction().replace(R.id.Frag_container,selectedFragment).commit();
                 return true;
             }
         });
