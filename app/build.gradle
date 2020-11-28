@@ -60,7 +60,8 @@ dependencies {
     // Glide library
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
-
+    //navigationBottom
+    implementation 'com.github.armcha:SpaceNavigationView:1.6.0'
 
 }
 apply plugin: 'com.google.gms.google-services'
