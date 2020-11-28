@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Register_Activity"></activity>
+        <activity android:name=".Register_Activity">
+
+        </activity>
 
         <activity android:name=".Login">
             <intent-filter>
