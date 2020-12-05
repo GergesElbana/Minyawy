@@ -15,6 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.minyawy.Admin.RestaurantDescriptionAdmin;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,16 +53,19 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
 
             @Override
             public void onClick(View view) {
-
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String use=user.getUid().toString();
                 String placenametext=holder.placeName.getText().toString();
-                if (placenametext.equals("Cafe"))
+                 if (placenametext.equals("Cafe")&&use.equals("6ReVtL2iSfRr1xcOX8qIqHg0bVf2"))
                 {
-                    Intent nona=new Intent(context,PlaceListActivity.class);
+                    Intent nona=new Intent(context, RestaurantDescriptionAdmin.class);
                     context.startActivity(nona);
                 }
-
-
-
+               else if (placenametext.equals("Cafe"))
+                {
+                    Intent nona=new Intent(context, PlaceListActivity.class);
+                    context.startActivity(nona);
+                }
 
             }
         });

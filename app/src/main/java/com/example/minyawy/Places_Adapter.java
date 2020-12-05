@@ -46,11 +46,11 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
         FechData fechData=fechDataList.get(position);
         viwHolder.placeName.setText(fechData.getPlaceName());
         viwHolder.placedesc.setText(fechData.location);*/
-        holder.placeName.setText(fechDataList.get(position).getPlaceName());
-        holder.placedesc.setText(fechDataList.get(position).getPlaceDescrip());
+        holder.placeName.setText(fechDataList.get(position).getName());
+        holder.placedesc.setText(fechDataList.get(position).getDescrip());
        Glide.with(activity)
                .load(fechDataList.get(position)
-                       .getLogo()).into(holder.placephoto);
+                       .getPhoto()).into(holder.placephoto);
 
 
 

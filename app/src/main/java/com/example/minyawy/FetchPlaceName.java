@@ -1,40 +1,40 @@
 package com.example.minyawy;
 
 public class FetchPlaceName {
-  private    String logo;
-  private   String PlaceName;
-  private   String PlaceDescrip;
+  private String photo;
+  private String name;
+  private String descrip;
 
     public FetchPlaceName() {
     }
 
-    public FetchPlaceName(String logo, String placeName, String placeDescrip) {
-        this.logo = logo;
-        PlaceName = placeName;
-        PlaceDescrip = placeDescrip;
+    public FetchPlaceName(String photo, String name, String descrip) {
+        this.photo = photo;
+        this.name = name;
+        this.descrip = descrip;
     }
 
-    public String getLogo() {
-        return logo;
+    public String getPhoto() {
+        return photo;
     }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 
-    public String getPlaceName() {
-        return PlaceName;
+    public String getName() {
+        return name;
     }
 
-    public void setPlaceName(String placeName) {
-        PlaceName = placeName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPlaceDescrip() {
-        return PlaceDescrip;
+    public String getDescrip() {
+        return descrip;
     }
 
-    public void setPlaceDescrip(String placeDescrip) {
-        PlaceDescrip = placeDescrip;
+    public void setDescrip(String descrip) {
+        this.descrip = descrip;
     }
 }

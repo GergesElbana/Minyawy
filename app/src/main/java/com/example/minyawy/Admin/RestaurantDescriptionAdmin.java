@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minyawy.FetchPlaceName;
+import com.example.minyawy.PlaceListActivity_ViewBinding;
 import com.example.minyawy.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -57,7 +58,7 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
         placeName=(EditText)findViewById(R.id.Admin_PlaceName);
         placeLocation=(EditText)findViewById(R.id.Admin_PlaceLocation);
         placeDescrip=(EditText)findViewById(R.id.Admin_PlaceDescription);
-        placePhone=(EditText)findViewById(R.id.Admin_PhoneNumber);
+        placePhone=(EditText)findViewById(R.id.Admin_PlaceNumber);
 
         setupPost();
 
@@ -112,10 +113,10 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+     String nono=placeName.getText().toString();
 
-
-        if (!placeName.getText().toString().isEmpty() || !placeDescrip.getText().toString().isEmpty()||
-                !placeLocation.getText().toString().isEmpty()||!placePhone.getText().toString().isEmpty()|| picturUri != null) {
+        if (!nono.isEmpty() || !placeDescrip.getText().toString().isEmpty()||
+                !placeLocation.getText().toString().isEmpty()||!placePhone.getText().toString().isEmpty()&& picturUri != null) {
             StorageReference storageReference = FirebaseStorage.getInstance().getReference("photo");
             final StorageReference imagePath = storageReference.child(picturUri.getLastPathSegment());
             imagePath.putFile(picturUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -128,9 +129,12 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
 
                             String imadeDownload = uri.toString();
 
-                            FetchPlaceName fetchPlaceName = new FetchPlaceName(imadeDownload, placeName.getText().toString()
-                                    ,placeDescrip.getText().toString());
+                          Admin_SendData fetchPlaceName = new Admin_SendData(imadeDownload, placeName.getText().toString()
+                                    ,placeDescrip.getText().toString(),placeLocation.getText().toString()
+                          ,placePhone.getText().toString());
                             addPosttoDatabase(fetchPlaceName);
+                           /* Intent nonty=new Intent(RestaurantDescriptionAdmin.this, PlaceListActivity_ViewBinding.class);
+                            startActivity(nonty);*/
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -152,17 +156,18 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    private void addPosttoDatabase(FetchPlaceName fetchPlaceName)
+    private void addPosttoDatabase(Admin_SendData fetchPlaceName)
     {
 
-        // String key =databaseReference.getKey();
-       // fetchPlaceName.setPostId(id);
+         //String key =databaseReference.getKey();
+        fetchPlaceName.setId(id);
 
-        databaseReference.setValue(fetchPlaceName)
+        databaseReference.child(id).setValue(fetchPlaceName)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         showMessage("successful");
+
                     }
                 });
     }

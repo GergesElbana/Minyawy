@@ -68,9 +68,9 @@ private void getfirebasedata(){
             clearData();
             for(DataSnapshot data:snapshot.getChildren()){
              FetchPlaceName fetchPlaceName=new FetchPlaceName();
-             fetchPlaceName.setPlaceName(data.child("name").getValue().toString());
-                fetchPlaceName.setPlaceDescrip(data.child("location").getValue().toString());
-                fetchPlaceName.setLogo(data.child("logo").getValue().toString());
+             fetchPlaceName.setName(data.child("name").getValue().toString());
+                fetchPlaceName.setDescrip(data.child("descrip").getValue().toString());
+                fetchPlaceName.setPhoto(data.child("photo").getValue().toString());
                 placesListData.add(fetchPlaceName);
 
             }
