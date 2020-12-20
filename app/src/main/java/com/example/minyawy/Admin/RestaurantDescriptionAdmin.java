@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.telephony.ims.RcsUceAdapter;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,8 +20,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minyawy.FetchPlaceName;
+import com.example.minyawy.HomeActivity;
 import com.example.minyawy.PlaceListActivity_ViewBinding;
+import com.example.minyawy.Places_Adapter;
 import com.example.minyawy.R;
+import com.example.minyawy.RecyclerAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -31,6 +35,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.UUID;
+import java.util.jar.Attributes;
 
 public class RestaurantDescriptionAdmin extends AppCompatActivity {
 
@@ -42,6 +47,8 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
     private final int PReqCode=1;
     private final int REQUESCODE=1;
     private Button send;
+    //خدت اوبجت من الادابتر علشان اعرف ااكسس التكست اللي عايزه
+  private   RecyclerAdapter b;
 
     static String id= UUID.randomUUID().toString();
 
@@ -119,6 +126,7 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
                 !placeLocation.getText().toString().isEmpty()||!placePhone.getText().toString().isEmpty()&& picturUri != null) {
             StorageReference storageReference = FirebaseStorage.getInstance().getReference("photo");
             final StorageReference imagePath = storageReference.child(picturUri.getLastPathSegment());
+
             imagePath.putFile(picturUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -160,16 +168,40 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
     {
 
          //String key =databaseReference.getKey();
-        fetchPlaceName.setId(id);
+        //نونة بتفتي فتي يعمل مصايب
+      //  fetchPlaceName.setId(id);
+       //الفنكشن دي شكلها ممكن تغير الداتا في الادبتر وتبقي حاجه عنب ههه
+       // b.setdata();
 
-        databaseReference.child(id).setValue(fetchPlaceName)
+      if (b.placenametext.equals("Restaurant")){
+          databaseReference.push().setValue(fetchPlaceName)
+                  .addOnSuccessListener(new OnSuccessListener<Void>() {
+                      @Override
+                      public void onSuccess(Void aVoid) {
+                          showMessage("successful");
+
+                      }
+                  });
+
+      }
+      else {
+          databaseReference.child("non").push().setValue(fetchPlaceName)
+                  .addOnSuccessListener(new OnSuccessListener<Void>() {
+                      @Override
+                      public void onSuccess(Void aVoid) {
+                          showMessage("successful");
+
+                      }
+                  });
+      }
+       /* databaseReference.push().setValue(fetchPlaceName)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
                         showMessage("successful");
 
                     }
-                });
+                });*/
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -25,6 +25,8 @@
         </activity>
         <activity android:name=".Admin.RestaurantDescriptionAdmin">
 
+
+
         </activity>
         <activity android:name=".PlaceListActivity" />
         <activity android:name=".HomeActivity">

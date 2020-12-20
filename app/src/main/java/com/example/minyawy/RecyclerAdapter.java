@@ -25,8 +25,10 @@ import java.util.List;
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestViewholder> {
     ArrayList<Place_Model> places=new ArrayList<>();
     Context context;
-  //  TextView placeName;
 
+  //  TextView placeName;
+    //خليت ده استاتك علشان اعرف ارفع داتا ف اي الريفرنس براحتي
+ public static   String placenametext;
     public RecyclerAdapter(ArrayList<Place_Model> places, Context context) {
         this.places = places;
         this.context=context;
@@ -55,7 +57,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
             public void onClick(View view) {
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String use=user.getUid().toString();
-                String placenametext=holder.placeName.getText().toString();
+             placenametext=holder.placeName.getText().toString();
                  if (placenametext.equals("Cafe")&&use.equals("6ReVtL2iSfRr1xcOX8qIqHg0bVf2"))
                 {
                     Intent nona=new Intent(context, RestaurantDescriptionAdmin.class);
@@ -63,9 +65,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
                 }
                else if (placenametext.equals("Cafe"))
                 {
+
                     Intent nona=new Intent(context, PlaceListActivity.class);
                     context.startActivity(nona);
                 }
+                 else if (placenametext.equals("Restaurant"))
+                 {
+
+                     Intent nona=new Intent(context, PlaceListActivity.class);
+                     context.startActivity(nona);
+                 }
 
             }
         });

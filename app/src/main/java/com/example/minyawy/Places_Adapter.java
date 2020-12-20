@@ -26,6 +26,7 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
     Activity activity;
    Context context0;
    int lastPosition=-1;
+
     public Places_Adapter(List<FetchPlaceName> fechDataList ,Activity activity) {
         this.fechDataList = fechDataList;
         this.activity=activity;
@@ -56,7 +57,6 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
 
         setAnimation(holder.card,position);
        holder.card.setOnClickListener(new View.OnClickListener() {
-
 
             @Override
             public void onClick(View view) {
