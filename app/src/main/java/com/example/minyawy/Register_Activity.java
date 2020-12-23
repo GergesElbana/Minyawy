@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,15 +13,24 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Register_Activity extends AppCompatActivity {
 
     private EditText name, email, password, confirmPassword;
     private Button regesterBtn;
    private ProgressBar progressBar;
+   private   String str_name;
+   private String str_email;
+   private String str_password;
+   private UserModel usermodel;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
 
    private FirebaseAuth mAuth;
 
@@ -28,6 +38,8 @@ public class Register_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_);
+        firebaseDatabase= FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference("user");
 
         mAuth=FirebaseAuth.getInstance();
 
@@ -46,9 +58,9 @@ public class Register_Activity extends AppCompatActivity {
                 regesterBtn.setVisibility(View.INVISIBLE);
                 progressBar.setVisibility(View.VISIBLE);
 
-                String str_name = name.getText().toString();
-                String str_email =email.getText().toString();
-                String str_password =password.getText().toString();
+                 str_name = name.getText().toString();
+                 str_email =email.getText().toString();
+                 str_password =password.getText().toString();
                 String str_confirmPassword =confirmPassword.getText().toString();
 
                 if(str_name.isEmpty() || str_email.isEmpty() || str_password.isEmpty() || !str_confirmPassword.equals(str_password))
@@ -71,7 +83,7 @@ public class Register_Activity extends AppCompatActivity {
 
     }
 
-    private void createUserAccount(String str_name, String str_email, String str_password) {
+    private void createUserAccount(final String str_name, final String str_email, final String str_password) {
 
         //this method create user account with specific email and password
         mAuth.createUserWithEmailAndPassword(str_email,str_password)
@@ -85,8 +97,20 @@ public class Register_Activity extends AppCompatActivity {
                             showMessage("Account Created");
                             regesterBtn.setVisibility(View.VISIBLE);
                             progressBar.setVisibility(View.INVISIBLE);
-                            Intent intent=new Intent(Register_Activity.this, HomeActivity.class);
-                            startActivity(intent);
+                            usermodel =new UserModel(str_email,str_password,str_name);
+                            String  Email =email.getText().toString();
+                            Log.v("gerges",Email);
+
+                            databaseReference.child(name.getText().toString().trim()).setValue(usermodel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(Register_Activity.this, "successful", Toast.LENGTH_SHORT).show();
+
+                                }
+                            });
+
+                          //  Intent intent=new Intent(Register_Activity.this, HomeActivity.class);
+                          //  startActivity(intent);
                         }
 
                         else

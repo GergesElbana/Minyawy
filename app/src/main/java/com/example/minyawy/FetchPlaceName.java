@@ -4,8 +4,8 @@ public class FetchPlaceName {
   private String photo;
   private String name;
   private String descrip;
-    String location;
-    String number;
+   private String location;
+    private String number;
 
     public FetchPlaceName() {
     }

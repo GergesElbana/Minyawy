@@ -49,7 +49,7 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
     private Button send;
     public static String id0;
     //خدت اوبجت من الادابتر علشان اعرف ااكسس التكست اللي عايزه
-  private   RecyclerAdapter b;
+    private   RecyclerAdapter b;
 
     static String id= UUID.randomUUID().toString();
 

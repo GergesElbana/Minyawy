@@ -10,8 +10,8 @@
         android:id="@+id/imageView2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_150sdp"
-        android:src="@drawable/rest"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop"
+        android:src="@drawable/rest" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ProfilePhoto"
@@ -21,4 +21,35 @@
         android:layout_marginTop="@dimen/_110sdp"
         android:src="@drawable/cafe"
        />
+
+    <TextView
+        android:id="@+id/Username"
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:text="Name"
+
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_200sdp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_300sdp"
+        android:orientation="horizontal"
+        android:weightSum="3">
+        <TextView
+            android:text="Email:"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:textSize="32sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/UserEmail"
+            android:textSize="32sp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
+
+    </LinearLayout>
 </FrameLayout>

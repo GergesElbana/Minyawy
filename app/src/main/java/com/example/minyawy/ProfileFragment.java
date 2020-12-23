@@ -1,5 +1,6 @@
 package com.example.minyawy;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +28,8 @@ public class ProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private TextView userName,userEmail;
+    private CircleImageView profilePhoto;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -53,8 +59,19 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View v=inflater.inflate(R.layout.fragment_profile, container, false);
+        userName=(TextView)v.findViewById(R.id.Username);
+        userEmail=(TextView)v.findViewById(R.id.UserEmail);
+        profilePhoto= (CircleImageView) v.findViewById(R.id.ProfilePhoto);
+     /*   Bundle bundle=getArguments();
+        String name=bundle.getString("name");
+        String email=bundle.getString("email");
+        userName.setText(name);
+        userEmail.setText(email);*/
+
+      //  Intent profilInt=Intent.getIntentOld();
+
         return v;
     }
 }
