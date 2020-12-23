@@ -4,6 +4,8 @@ public class FetchPlaceName {
   private String photo;
   private String name;
   private String descrip;
+    String location;
+    String number;
 
     public FetchPlaceName() {
     }
@@ -36,5 +38,21 @@ public class FetchPlaceName {
 
     public void setDescrip(String descrip) {
         this.descrip = descrip;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
     }
 }

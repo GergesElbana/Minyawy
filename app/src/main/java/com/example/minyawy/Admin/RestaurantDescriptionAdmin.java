@@ -47,6 +47,7 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
     private final int PReqCode=1;
     private final int REQUESCODE=1;
     private Button send;
+    public static String id0;
     //خدت اوبجت من الادابتر علشان اعرف ااكسس التكست اللي عايزه
   private   RecyclerAdapter b;
 
@@ -59,6 +60,7 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
 
         firebaseDatabase=FirebaseDatabase.getInstance();
         databaseReference=firebaseDatabase.getReference("Restaurant");
+        id0=databaseReference.push().getKey();
 
         placeLogo=(ImageView)findViewById(R.id.Admin_PlaceLogo);
         send=(Button)findViewById(R.id.send);
@@ -139,7 +141,7 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
 
                           Admin_SendData fetchPlaceName = new Admin_SendData(imadeDownload, placeName.getText().toString()
                                     ,placeDescrip.getText().toString(),placeLocation.getText().toString()
-                          ,placePhone.getText().toString());
+                          ,placePhone.getText().toString(),id0);
                             addPosttoDatabase(fetchPlaceName);
                            /* Intent nonty=new Intent(RestaurantDescriptionAdmin.this, PlaceListActivity_ViewBinding.class);
                             startActivity(nonty);*/
@@ -174,7 +176,7 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
        // b.setdata();
 
       if (b.placenametext.equals("Restaurant")){
-          databaseReference.push().setValue(fetchPlaceName)
+          databaseReference.child(id0).setValue(fetchPlaceName)
                   .addOnSuccessListener(new OnSuccessListener<Void>() {
                       @Override
                       public void onSuccess(Void aVoid) {

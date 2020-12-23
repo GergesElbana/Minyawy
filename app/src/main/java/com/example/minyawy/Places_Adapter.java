@@ -3,6 +3,8 @@ package com.example.minyawy;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.icu.text.Transliterator;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.minyawy.Admin.Admin_SendData;
+import com.example.minyawy.Admin.RestaurantDescriptionAdmin;
 
 import java.util.List;
 
@@ -26,6 +30,9 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
     Activity activity;
    Context context0;
    int lastPosition=-1;
+   public static String placenamee;
+   Admin_SendData admin_sendData;
+   public static String Id;
 
     public Places_Adapter(List<FetchPlaceName> fechDataList ,Activity activity) {
         this.fechDataList = fechDataList;
@@ -47,6 +54,7 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
         FechData fechData=fechDataList.get(position);
         viwHolder.placeName.setText(fechData.getPlaceName());
         viwHolder.placedesc.setText(fechData.location);*/
+        holder.placeName.getText().toString();
         holder.placeName.setText(fechDataList.get(position).getName());
         holder.placedesc.setText(fechDataList.get(position).getDescrip());
        Glide.with(activity)
@@ -61,8 +69,24 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
             @Override
             public void onClick(View view) {
 
+//                Id= RestaurantDescriptionAdmin.id0;
+//                Log.v(Id,"dosa");
                Intent ih=new Intent(activity,RestaurantDescription.class);
                activity.startActivity(ih);
+
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(activity,RestaurantDescription.class);
+                intent.putExtra("name",fechDataList.get(position).getName());
+                intent.putExtra("dis",fechDataList.get(position).getDescrip());
+                intent.putExtra("photo",fechDataList.get(position).getPhoto());
+                intent.putExtra("num",fechDataList.get(position).getNumber());
+                intent.putExtra("loc",fechDataList.get(position).getLocation());
+                activity.startActivity(intent);
 
             }
         });

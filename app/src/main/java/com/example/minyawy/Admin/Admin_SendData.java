@@ -11,12 +11,13 @@ public class Admin_SendData {
     public Admin_SendData() {
     }
 
-    public Admin_SendData(String photo, String name, String descrip, String location, String number) {
+    public Admin_SendData(String photo, String name, String descrip, String location, String number,String id) {
         this.photo = photo;
         this.name = name;
         this.descrip = descrip;
         this.location = location;
         this.number = number;
+        this.id=id;
     }
 
     public String getPhoto() {

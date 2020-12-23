@@ -21,6 +21,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -43,6 +45,7 @@ public class RestaurantDescription extends AppCompatActivity {
     TextView RestaurantLocation;
     private DatabaseReference databaseReference;
     private    Admin_SendData admin;
+    private ArrayList<Admin_SendData> admin_sendDataArrayList;
 
     String placnum;
     String plac;
@@ -51,31 +54,46 @@ public class RestaurantDescription extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_description);
         ButterKnife.bind(this);
-        databaseReference= FirebaseDatabase.getInstance().getReference("Restaurant");
+
+        String placPhoto=getIntent().getExtras().getString("photo");
+        Glide.with(this).load(placPhoto).into(ReataurateImage);
+        String plName=getIntent().getExtras().getString("name");
+        RestaurantName.setTitle(plName);
+        String plDiscr=getIntent().getExtras().getString("dis");
+        RestaurantCaption.setText(plDiscr);
+        String plNumber=getIntent().getExtras().getString("num");
+        Resturantnumber.setText(plNumber);
+        String plLocation=getIntent().getExtras().getString("loc");
+        RestaurantLocation.setText(plLocation);
+
+
+
+       /* databaseReference= FirebaseDatabase.getInstance().getReference("Restaurant").child("non");
        /* Query query=databaseReference.child("Restaurant");
-        query*/databaseReference.addValueEventListener(new ValueEventListener() {
+        query*databaseReference.child(Places_Adapter.Id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                for(DataSnapshot data:snapshot.getChildren()) {
-          admin=data.getValue(Admin_SendData.class);
+               // for(DataSnapshot data:snapshot.getChildren()) {
+
+                    admin =snapshot.getValue(Admin_SendData.class);
+
 
                     RestaurantCaption.setText(admin.getDescrip());
                     RestaurantLocation.setText(admin.getLocation());
                     Glide.with(RestaurantDescription.this)
                             .load(admin.getPhoto()).into(ReataurateImage);
-                    placnum=admin.getNumber();
-                    plac=admin.getName();
+                    placnum = admin.getNumber();
+                    plac = admin.getName();
                     Resturantnumber.setText(placnum);
+
 
                 }
 
 
 
 
-
-
-            }
+           // }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -94,7 +112,7 @@ public class RestaurantDescription extends AppCompatActivity {
                 call.setData(Uri.parse("tel:" + numb));
                 startActivity(call);
             }
-        });
+        });*/
 
 
     }

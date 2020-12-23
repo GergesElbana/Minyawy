@@ -70,6 +70,8 @@ private void getfirebasedata(){
              FetchPlaceName fetchPlaceName=new FetchPlaceName();
              fetchPlaceName.setName(data.child("name").getValue().toString());
                 fetchPlaceName.setDescrip(data.child("descrip").getValue().toString());
+                fetchPlaceName.setNumber(data.child("number").getValue().toString());
+                fetchPlaceName.setLocation(data.child("location").getValue().toString());
                 fetchPlaceName.setPhoto(data.child("photo").getValue().toString());
                 placesListData.add(fetchPlaceName);
 
