@@ -61,7 +61,8 @@ public class PlaceListActivity extends AppCompatActivity {
 
 private void getfirebasedata(){
 
-    Query query=databaseReference.child("Restaurant").child("non");
+
+    Query query=databaseReference.child( RecyclerAdapter.placenametext);
     query.addValueEventListener(new ValueEventListener() {
         @Override
         public void onDataChange(@NonNull DataSnapshot snapshot) {

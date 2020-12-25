@@ -58,12 +58,24 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 String use=user.getUid().toString();
              placenametext=holder.placeName.getText().toString();
-                 if (placenametext.equals("Cafe")&&use.equals("6ReVtL2iSfRr1xcOX8qIqHg0bVf2"))
+             String Places[]={"Cafe","Restaurant","clothes","bank","hotel","hospital","Pharmacy","Men_Suit"};
+             for (int i=0;i<Places.length;i++){
+                 if (placenametext.equals(Places[i])&&use.equals("6ReVtL2iSfRr1xcOX8qIqHg0bVf2"))
                 {
                     Intent nona=new Intent(context, RestaurantDescriptionAdmin.class);
                     context.startActivity(nona);
                 }
-               else if (placenametext.equals("Cafe"))
+
+
+                 else if (placenametext.equals(Places[i]))
+                 {
+
+                     Intent nona=new Intent(context, PlaceListActivity.class);
+                     context.startActivity(nona);
+                 }
+             }
+
+             /*  else if (placenametext.equals("Cafe"))
                 {
 
                     Intent nona=new Intent(context, PlaceListActivity.class);
@@ -74,7 +86,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
 
                      Intent nona=new Intent(context, PlaceListActivity.class);
                      context.startActivity(nona);
-                 }
+                 }*/
 
             }
         });

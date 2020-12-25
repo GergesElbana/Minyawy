@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -41,7 +43,8 @@ public class ProfileFragment extends Fragment {
     private FirebaseDatabase database;
     private DatabaseReference userRef;
     private final String users="user";
-
+    private FirebaseAuth mAuth;
+    private FirebaseUser currentuser;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -80,6 +83,11 @@ public class ProfileFragment extends Fragment {
         profilePhoto= (CircleImageView) v.findViewById(R.id.ProfilePhoto);
         database=FirebaseDatabase.getInstance();
         userRef=database.getReference(users);
+
+        mAuth=FirebaseAuth.getInstance();
+        currentuser=mAuth.getCurrentUser();
+         name4=currentuser.getEmail();
+
        /* Bundle bundle=getArguments();
         name4=bundle.getString("email");*/
 

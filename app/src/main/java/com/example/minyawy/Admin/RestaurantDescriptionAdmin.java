@@ -50,7 +50,7 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
     public static String id0;
     //خدت اوبجت من الادابتر علشان اعرف ااكسس التكست اللي عايزه
     private   RecyclerAdapter b;
-
+    private String PlaceNameList[]={"Cafe","Restaurant","clothes","bank","hotel","hospital","Pharmacy","Men_Suit"};
     static String id= UUID.randomUUID().toString();
 
     @Override
@@ -58,9 +58,9 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_description_admin);
 
-        firebaseDatabase=FirebaseDatabase.getInstance();
-        databaseReference=firebaseDatabase.getReference("Restaurant");
-        id0=databaseReference.push().getKey();
+       // firebaseDatabase=FirebaseDatabase.getInstance();
+      //  databaseReference=firebaseDatabase.getReference("Restaurant");
+       // id0=databaseReference.push().getKey();
 
         placeLogo=(ImageView)findViewById(R.id.Admin_PlaceLogo);
         send=(Button)findViewById(R.id.send);
@@ -175,26 +175,22 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
        //الفنكشن دي شكلها ممكن تغير الداتا في الادبتر وتبقي حاجه عنب ههه
        // b.setdata();
 
-      if (b.placenametext.equals("Restaurant")){
-          databaseReference.child(id0).setValue(fetchPlaceName)
-                  .addOnSuccessListener(new OnSuccessListener<Void>() {
-                      @Override
-                      public void onSuccess(Void aVoid) {
-                          showMessage("successful");
+      for(int i=0;i<PlaceNameList.length;i++) {
 
-                      }
-                  });
 
-      }
-      else {
-          databaseReference.child("non").push().setValue(fetchPlaceName)
-                  .addOnSuccessListener(new OnSuccessListener<Void>() {
-                      @Override
-                      public void onSuccess(Void aVoid) {
-                          showMessage("successful");
+          if (b.placenametext.equals(PlaceNameList[i])) {
+              firebaseDatabase=FirebaseDatabase.getInstance();
+              databaseReference=firebaseDatabase.getReference(b.placenametext);
+              id0=databaseReference.push().getKey();
 
-                      }
-                  });
+              databaseReference.child(id0).setValue(fetchPlaceName)
+                      .addOnSuccessListener(new OnSuccessListener<Void>() {
+                          @Override
+                          public void onSuccess(Void aVoid) {
+                              showMessage("successful");
+                          }
+                      });
+          }
       }
        /* databaseReference.push().setValue(fetchPlaceName)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
