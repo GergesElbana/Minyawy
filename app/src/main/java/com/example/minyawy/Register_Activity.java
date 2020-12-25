@@ -101,7 +101,8 @@ public class Register_Activity extends AppCompatActivity {
                             String  Email =email.getText().toString();
                             Log.v("gerges",Email);
 
-                            databaseReference.child(name.getText().toString().trim()).setValue(usermodel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            databaseReference.push().setValue(usermodel)
+                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     Toast.makeText(Register_Activity.this, "successful", Toast.LENGTH_SHORT).show();

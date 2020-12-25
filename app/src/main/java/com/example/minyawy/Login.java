@@ -33,6 +33,7 @@ public class Login extends AppCompatActivity {
     private ProgressBar progressBar_log;
     private TextView textViewRegister;
     private FirebaseAuth mAuth;
+    
     FragmentManager manger=getSupportFragmentManager();
     FragmentTransaction t=manger.beginTransaction();
 
@@ -65,8 +66,9 @@ public class Login extends AppCompatActivity {
                 progressBar_log.setVisibility(View.VISIBLE);
                 logBtn.setVisibility(View.INVISIBLE);
 
-                final String log_mail = userMail.getText().toString();
+                 String log_mail = userMail.getText().toString();
                 final String log_password = userPassword.getText().toString();
+
 
                 if(log_mail.isEmpty() || log_password.isEmpty())
                 {
@@ -75,6 +77,18 @@ public class Login extends AppCompatActivity {
 
                 else
                 {
+                   /* Bundle bundle=new Bundle();
+                    bundle.putString("email0",log_mail);
+                    ProfileFragment pf=new ProfileFragment();
+                    pf.setArguments(bundle);*/
+ ////////////////////////////////////////////////////
+                /*    Intent in = new Intent (Login.this, ProfileFragment.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("name0", log_mail);
+                    in.putExtras(bundle);
+                    startActivity(in);*/
+///////////////////////////////////////////////////////
+                    // getMyData();
                     signIn(log_mail,log_password);
                 }
 
@@ -94,8 +108,10 @@ public class Login extends AppCompatActivity {
                     logBtn.setVisibility(View.VISIBLE);
                     progressBar_log.setVisibility(View.INVISIBLE);
                   //  isUser();
+
                     Intent intent=new Intent(Login.this, HomeActivity.class);
                    startActivity(intent);
+                   finish();
                 }
 
                 else
@@ -112,7 +128,12 @@ public class Login extends AppCompatActivity {
     private void showMessage(String message) {
         Toast.makeText(this,message, Toast.LENGTH_SHORT).show();
     }
-//get user information
+
+
+
+
+    //get user information
+
     public void isUser (){
         final String UserEnteredUserName= userMail.getText().toString().trim();
         final String UserEnteredPassword=userPassword.getText().toString().trim();
@@ -157,4 +178,11 @@ public class Login extends AppCompatActivity {
 
 
     }
+
+    public String getMyData() {
+
+        String log_mail = userMail.getText().toString();
+        return log_mail;
+    }
+
 }
