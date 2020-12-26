@@ -32,7 +32,7 @@ public class Login extends AppCompatActivity {
     private Button logBtn;
     private ProgressBar progressBar_log;
     private TextView textViewRegister;
-    private FirebaseAuth mAuth;
+    private FirebaseAuth mmAuth;
     
     FragmentManager manger=getSupportFragmentManager();
     FragmentTransaction t=manger.beginTransaction();
@@ -42,7 +42,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mAuth=FirebaseAuth.getInstance();
+        mmAuth=FirebaseAuth.getInstance();
 
         userMail=(EditText)findViewById(R.id.log_Email);
         userPassword=(EditText)findViewById(R.id.log_password);
@@ -98,7 +98,7 @@ public class Login extends AppCompatActivity {
 
     private void signIn(String log_mail, String log_password) {
 
-        mAuth.signInWithEmailAndPassword(log_mail,log_password)
+        mmAuth.signInWithEmailAndPassword(log_mail,log_password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

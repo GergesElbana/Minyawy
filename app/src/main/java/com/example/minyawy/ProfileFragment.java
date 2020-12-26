@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -87,6 +88,7 @@ public class ProfileFragment extends Fragment {
         mAuth=FirebaseAuth.getInstance();
         currentuser=mAuth.getCurrentUser();
          name4=currentuser.getEmail();
+        Glide.with(this).load(currentuser.getPhotoUrl()).into(profilePhoto);
 
        /* Bundle bundle=getArguments();
         name4=bundle.getString("email");*/

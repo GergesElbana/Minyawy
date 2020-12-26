@@ -25,31 +25,49 @@
     <TextView
         android:id="@+id/Username"
         android:layout_width="wrap_content"
-        android:layout_height="46dp"
-        android:text="Name"
-
-        android:gravity="center_horizontal"
+        android:layout_height="39dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/_200sdp"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/_50sdp"
-        android:layout_marginTop="@dimen/_300sdp"
-        android:orientation="horizontal"
-        android:weightSum="3">
-        <TextView
-            android:text="Email:"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:textSize="32sp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-        <TextView
-            android:id="@+id/UserEmail"
-            android:textSize="32sp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="2"/>
+        android:layout_marginTop="@dimen/_200sdp"
+        android:gravity="center_horizontal"
+        android:text="Name"
+        android:textColor="#000"
+        android:textSize="20sp" />
 
-    </LinearLayout>
+    <TextView
+        android:id="@+id/UserEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:layout_marginTop="@dimen/_230sdp"
+        android:layout_marginStart="@dimen/_70sdp"/>
+
+
+    <!--  <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="@dimen/_60sdp"
+          android:layout_marginTop="@dimen/_300sdp"
+          android:orientation="horizontal"
+          android:weightSum="3"
+          android:padding="@dimen/_16sdp"
+          >
+          <TextView
+              android:text="Email:"
+              android:textColor="#000"
+              android:layout_marginStart="@dimen/_8sdp"
+              android:textSize="20sp"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="1"
+              android:drawableStart="@drawable/ic_email"/>
+          <TextView
+              android:id="@+id/UserEmail"
+              android:textSize="20sp"
+              android:textColor="#000"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:layout_weight="2" />
+
+      </LinearLayout>-->
 </FrameLayout>
