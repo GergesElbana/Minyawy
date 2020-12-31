@@ -50,6 +50,7 @@ public class Register_Activity extends AppCompatActivity {
    private int PReqCode=1;
    private int REQUESCODE=1;
     private Uri picturUri;
+    public static String iid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -169,7 +170,11 @@ public class Register_Activity extends AppCompatActivity {
                             String  Email =email.getText().toString();
                             Log.v("gerges",Email);
 
-                            databaseReference.push().setValue(usermodel)
+                             iid=databaseReference.push().getKey();
+
+                            databaseReference.child(iid).setValue(usermodel)
+
+
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

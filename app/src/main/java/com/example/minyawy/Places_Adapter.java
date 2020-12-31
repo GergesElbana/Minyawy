@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -22,6 +23,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.minyawy.Admin.Admin_SendData;
 import com.example.minyawy.Admin.RestaurantDescriptionAdmin;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -33,6 +37,9 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
    public static String placenamee;
    Admin_SendData admin_sendData;
    public static String Id;
+    private FirebaseDatabase firebaseDatabase;
+    private DatabaseReference databaseReference;
+
 
     public Places_Adapter(List<FetchPlaceName> fechDataList ,Activity activity) {
         this.fechDataList = fechDataList;
@@ -48,7 +55,7 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
     }
 
     @Override
-    public void onBindViewHolder(@NonNull viwHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final viwHolder holder, final int position) {
 
       /*  viwHolder viwHolder=(viwHolder)holder;
         FechData fechData=fechDataList.get(position);
@@ -64,20 +71,29 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
 
 
         setAnimation(holder.card,position);
-       holder.card.setOnClickListener(new View.OnClickListener() {
+       holder.placephoto.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
 
-//                Id= RestaurantDescriptionAdmin.id0;
-//                Log.v(Id,"dosa");
-               Intent ih=new Intent(activity,RestaurantDescription.class);
-               activity.startActivity(ih);
+
+              /* Intent ih=new Intent(activity,RestaurantDescription.class);
+               activity.startActivity(ih);*/
+                Intent intent=new Intent(activity,RestaurantDescription.class);
+                intent.putExtra("name",fechDataList.get(position).getName());
+                intent.putExtra("dis",fechDataList.get(position).getDescrip());
+                intent.putExtra("photo",fechDataList.get(position).getPhoto());
+                intent.putExtra("num",fechDataList.get(position).getNumber());
+                intent.putExtra("loc",fechDataList.get(position).getLocation());
+                activity.startActivity(intent);
+
+
+
 
             }
         });
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent=new Intent(activity,RestaurantDescription.class);
@@ -89,7 +105,36 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
                 activity.startActivity(intent);
 
             }
+        });*/
+
+        holder.fvrt_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                firebaseDatabase=FirebaseDatabase.getInstance();
+                databaseReference=firebaseDatabase.getReference("user");
+                String pn=holder.placeName.getText().toString();
+                String pd=holder.placedesc.getText().toString();
+                String ph=fechDataList.get(position).getPhoto();
+                FetchPlaceName f=new FetchPlaceName(ph,pn,pd);
+           //.child(Register_Activity.id)
+
+                databaseReference.
+                        
+                        child("favoriteList").push()
+                        .setValue(f)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+
+                            }
+                        });
+
+            }
         });
+
+
+
 
 
     }
@@ -115,6 +160,12 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
         TextView placedesc;
         ImageView placephoto;
         CardView card;
+        ImageButton fvrt_btn;
+
+
+
+
+
 
         public viwHolder(@NonNull View itemView) {
             super(itemView);
@@ -122,6 +173,7 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
             placedesc=(TextView)itemView.findViewById(R.id.text_placedescrip);
             placephoto=(ImageView)itemView.findViewById(R.id.itemImage);
             card=(CardView) itemView.findViewById(R.id.card0);
+            fvrt_btn=(ImageButton)itemView.findViewById(R.id.favrt_btn) ;
         }
     }
 }
