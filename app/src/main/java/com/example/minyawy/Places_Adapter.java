@@ -24,6 +24,8 @@ import com.bumptech.glide.Glide;
 import com.example.minyawy.Admin.Admin_SendData;
 import com.example.minyawy.Admin.RestaurantDescriptionAdmin;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -118,10 +120,12 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
                 String ph=fechDataList.get(position).getPhoto();
                 FetchPlaceName f=new FetchPlaceName(ph,pn,pd);
            //.child(Register_Activity.id)
-
+                FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+                currentFirebaseUser.getUid();
+                String m= currentFirebaseUser.getUid();
                 databaseReference.
-                        
-                        child("favoriteList").push()
+
+                        child("favoriteList").child(m).push()
                         .setValue(f)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
@@ -161,10 +165,6 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
         ImageView placephoto;
         CardView card;
         ImageButton fvrt_btn;
-
-
-
-
 
 
         public viwHolder(@NonNull View itemView) {
