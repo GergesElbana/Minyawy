@@ -190,6 +190,8 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
                               showMessage("successful");
                           }
                       });
+           /*  Intent nopnty=new Intent(RestaurantDescriptionAdmin.this, PlaceListActivity_ViewBinding.class);
+                            startActivity(nopnty);*/
           }
       }
        /* databaseReference.push().setValue(fetchPlaceName)

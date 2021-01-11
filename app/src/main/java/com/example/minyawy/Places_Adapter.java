@@ -133,6 +133,7 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
 
                             }
                         });
+                
 
             }
         });

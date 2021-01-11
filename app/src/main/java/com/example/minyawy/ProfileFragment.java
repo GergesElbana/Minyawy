@@ -106,7 +106,7 @@ public class ProfileFragment extends Fragment {
 
 
 
-        userRef.addValueEventListener(new ValueEventListener() {
+        userRef.child("info").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot ds:snapshot.getChildren()){

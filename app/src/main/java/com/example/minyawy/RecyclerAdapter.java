@@ -60,7 +60,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.RestVi
              placenametext=holder.placeName.getText().toString();
              String Places[]={"Cafe","Restaurant","clothes","bank","hotel","hospital","Pharmacy","Men_Suit"};
              for (int i=0;i<Places.length;i++){
-                 if (placenametext.equals(Places[i])&&use.equals("6ReVtL2iSfRr1xcOX8qIqHg0bVf2"))
+                 if (placenametext.equals(Places[i])&&use.equals("MpkYocBZ4QMGldR96HgmBbnYmRD3"))
                 {
                     Intent nona=new Intent(context, RestaurantDescriptionAdmin.class);
                     context.startActivity(nona);

@@ -172,7 +172,7 @@ public class Register_Activity extends AppCompatActivity {
 
                              iid=databaseReference.push().getKey();
 
-                            databaseReference.child(iid).setValue(usermodel)
+                            databaseReference.child("info").child(iid).setValue(usermodel)
 
 
                                     .addOnSuccessListener(new OnSuccessListener<Void>() {
