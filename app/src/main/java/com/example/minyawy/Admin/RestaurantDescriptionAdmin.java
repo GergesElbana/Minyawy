@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.minyawy.FetchPlaceName;
 import com.example.minyawy.HomeActivity;
+import com.example.minyawy.PlaceListActivity;
 import com.example.minyawy.PlaceListActivity_ViewBinding;
 import com.example.minyawy.Places_Adapter;
 import com.example.minyawy.R;
@@ -51,7 +52,7 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
     //خدت اوبجت من الادابتر علشان اعرف ااكسس التكست اللي عايزه
     private   RecyclerAdapter b;
     private String PlaceNameList[]={"Cafe","Restaurant","clothes","bank","hotel","hospital","Pharmacy","Men_Suit"};
-    static String id= UUID.randomUUID().toString();
+    private String id= UUID.randomUUID().toString();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,8 +144,8 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
                                     ,placeDescrip.getText().toString(),placeLocation.getText().toString()
                           ,placePhone.getText().toString(),id0);
                             addPosttoDatabase(fetchPlaceName);
-                           /* Intent nonty=new Intent(RestaurantDescriptionAdmin.this, PlaceListActivity_ViewBinding.class);
-                            startActivity(nonty);*/
+                            Intent nonty=new Intent(RestaurantDescriptionAdmin.this, PlaceListActivity.class);
+                            startActivity(nonty);
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {
@@ -156,6 +157,11 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
 
                 }
             });
+        }
+
+        else
+        {
+            showMessage("Please full Data");
         }
 
             }
@@ -183,7 +189,7 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
               databaseReference=firebaseDatabase.getReference(b.placenametext);
               id0=databaseReference.push().getKey();
 
-              databaseReference.child(id0).setValue(fetchPlaceName)
+              databaseReference.child(id).setValue(fetchPlaceName)
                       .addOnSuccessListener(new OnSuccessListener<Void>() {
                           @Override
                           public void onSuccess(Void aVoid) {
