@@ -35,7 +35,7 @@ public class NotificationFragment extends Fragment {
    Context context;
     private DatabaseReference databaseReference;
     private List<FetchPlaceName> placesListData;
-    private Places_Adapter places_adapter;
+    private Notification_Adapter notification_adapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -78,17 +78,20 @@ public class NotificationFragment extends Fragment {
         prefRecy=(RecyclerView)v.findViewById(R.id.notiRecycler);
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
         prefRecy.setLayoutManager(linearLayoutManager);
-        databaseReference= FirebaseDatabase.getInstance().getReference("user");
+        databaseReference= FirebaseDatabase.getInstance().getReference("favouriteList");
         placesListData=new ArrayList<>();
         getfirebasedata();
         return v;
     }
     private void getfirebasedata(){
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-        currentFirebaseUser.getUid();
-        String m= currentFirebaseUser.getUid();
+//        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
+//        currentFirebaseUser.getUid();
+//        String m= currentFirebaseUser.getUid();
 
-        Query query=databaseReference.child("favoriteList").child(m);
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        final String currentUser=user.getUid();
+
+        Query query=databaseReference.child(currentUser);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -101,9 +104,9 @@ public class NotificationFragment extends Fragment {
                     placesListData.add(fetchPlaceName);
 
                 }
-                places_adapter = new Places_Adapter(placesListData, getActivity());
-                prefRecy.setAdapter(places_adapter);
-                places_adapter.notifyDataSetChanged();
+                notification_adapter = new Notification_Adapter(getActivity(), placesListData);
+                prefRecy.setAdapter(notification_adapter);
+                notification_adapter.notifyDataSetChanged();
             }
 
             @Override

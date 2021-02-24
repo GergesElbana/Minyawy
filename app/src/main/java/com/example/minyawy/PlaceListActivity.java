@@ -9,6 +9,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.example.minyawy.Admin.Admin_SendData;
+import com.example.minyawy.Admin.RestaurantDescriptionAdmin;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,7 +30,9 @@ import butterknife.ButterKnife;
 public class PlaceListActivity extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference, photoData, fvrtref, fvrt_listRef;
+    private Boolean fvrtCheker=false;
+    private FetchPlaceName placeName;
     private Places_Adapter places_adapter;
 
 
@@ -44,17 +51,39 @@ public class PlaceListActivity extends AppCompatActivity {
       LinearLayoutManager linearLayoutManager=new LinearLayoutManager(context);
         PlaceRecycler.setLayoutManager(linearLayoutManager);
 
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        String CurrentUser=user.getUid();
      //   firebaseDatabase=FirebaseDatabase.getInstance();
         databaseReference=FirebaseDatabase.getInstance().getReference();
-
-
-
+        photoData=FirebaseDatabase.getInstance().getReference();
+       // placeName=new FetchPlaceName();
+//        fvrtref=firebaseDatabase.getReference("user").child("favourites");
+//        fvrt_listRef=firebaseDatabase.getReference("user").child("favouriteList").child(CurrentUser);
 
         placesListData=new ArrayList<>();
         clearData();
         getfirebasedata();
 
-  }
+       /* photoData.child("menu_photo").child(RestaurantDescriptionAdmin.string).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot data:snapshot.getChildren()){
+                    FetchPlaceName fetchPlaceName=new FetchPlaceName();
+                   // fetchPlaceName.setPhoto_1(data.child("photo_1").getValue().toString());
+                    Glide.with(PlaceListActivity.this).load(fetchPlaceName.getPhoto_1()).into();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });*/
+
+
+    }
 
 
 
@@ -87,6 +116,7 @@ private void getfirebasedata(){
 
         }
     });
+
 }
 private void clearData(){
         if(placesListData!=null){

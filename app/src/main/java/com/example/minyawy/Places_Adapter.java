@@ -26,22 +26,28 @@ import com.example.minyawy.Admin.RestaurantDescriptionAdmin;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
 public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolder> {
-    List<FetchPlaceName> fechDataList;
-    Activity activity;
-   Context context0;
-   int lastPosition=-1;
-   public static String placenamee;
-   Admin_SendData admin_sendData;
-   public static String Id;
+    private List<FetchPlaceName> fechDataList;
+    private Activity activity;
+    private Context context0;
+    int lastPosition=-1;
+    public static String placenamee;
+    private Admin_SendData admin_sendData;
+    public static String Id;
     private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference;
+    private DatabaseReference databaseReference,fvrtref, fvrt_listRef;
 
+
+    private Boolean fvrtCheker=false;
 
     public Places_Adapter(List<FetchPlaceName> fechDataList ,Activity activity) {
         this.fechDataList = fechDataList;
@@ -59,16 +65,12 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
     @Override
     public void onBindViewHolder(@NonNull final viwHolder holder, final int position) {
 
-      /*  viwHolder viwHolder=(viwHolder)holder;
-        FechData fechData=fechDataList.get(position);
-        viwHolder.placeName.setText(fechData.getPlaceName());
-        viwHolder.placedesc.setText(fechData.location);*/
         holder.placeName.getText().toString();
         holder.placeName.setText(fechDataList.get(position).getName());
         holder.placedesc.setText(fechDataList.get(position).getDescrip());
-       Glide.with(activity)
-               .load(fechDataList.get(position)
-                       .getPhoto()).into(holder.placephoto);
+        Glide.with(activity)
+                .load(fechDataList.get(position)
+                        .getPhoto()).into(holder.placephoto);
 
 
 
@@ -95,44 +97,56 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
             }
         });
 
-       /* holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(activity,RestaurantDescription.class);
-                intent.putExtra("name",fechDataList.get(position).getName());
-                intent.putExtra("dis",fechDataList.get(position).getDescrip());
-                intent.putExtra("photo",fechDataList.get(position).getPhoto());
-                intent.putExtra("num",fechDataList.get(position).getNumber());
-                intent.putExtra("loc",fechDataList.get(position).getLocation());
-                activity.startActivity(intent);
+        FirebaseUser user= FirebaseAuth.getInstance().getCurrentUser();
+        final String currentUser=user.getUid();
 
-            }
-        });*/
+        firebaseDatabase=FirebaseDatabase.getInstance();
+        databaseReference=firebaseDatabase.getReference("user");
+        final String name=holder.placeName.getText().toString();
+        final String pd=holder.placedesc.getText().toString();
+        final String ph=fechDataList.get(position).getPhoto();
+        final FetchPlaceName f=new FetchPlaceName(pd,ph,name);
 
+        final String postKey=fechDataList.get(position).getName();
+        holder.favoriteChecker(postKey);
         holder.fvrt_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                firebaseDatabase=FirebaseDatabase.getInstance();
-                databaseReference=firebaseDatabase.getReference("user");
-                String pn=holder.placeName.getText().toString();
-                String pd=holder.placedesc.getText().toString();
-                String ph=fechDataList.get(position).getPhoto();
-                FetchPlaceName f=new FetchPlaceName(ph,pn,pd);
-           //.child(Register_Activity.id)
-                FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser() ;
-                currentFirebaseUser.getUid();
-                String m= currentFirebaseUser.getUid();
-                databaseReference.
+                fvrtref=firebaseDatabase.getReference("favourites");
+                fvrt_listRef=firebaseDatabase.getReference("favouriteList").child(currentUser);
 
-                        child("favoriteList").child(m).push()
-                        .setValue(f)
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
+                fvrtCheker=true;
+                fvrtref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                        if (fvrtCheker.equals(true)) {
+                            if (snapshot.child(postKey).hasChild(currentUser)) {
+                                fvrtref.child(postKey).child(currentUser).removeValue();
+                                delete(name);
+                                fvrtCheker = false;
+                            } else {
+                                fvrtref.child(postKey).child(currentUser).setValue(true);
+                               FetchPlaceName fetchPlaceName = new FetchPlaceName();
+                                fetchPlaceName.setName(name);
+                                fetchPlaceName.setDescrip(pd);
+                                fetchPlaceName.setPhoto(ph);
+
+                                String id = fvrt_listRef.push().getKey();
+                                fvrt_listRef.child(id).setValue(fetchPlaceName);
+                                fvrtCheker = false;
                             }
-                        });
+
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 
 
             }
@@ -142,6 +156,27 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
 
 
 
+    }
+
+    private void delete(String name) {
+        Query query=fvrt_listRef.orderByChild("name").equalTo(name);
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                for(DataSnapshot dataSnapshot : snapshot.getChildren())
+                {
+                    dataSnapshot.getRef().removeValue();
+                    Toast.makeText(activity, "Deleted", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void setAnimation(CardView card, int position) {
@@ -166,6 +201,8 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
         ImageView placephoto;
         CardView card;
         ImageButton fvrt_btn;
+        DatabaseReference favouriteRef;
+        FirebaseDatabase database=FirebaseDatabase.getInstance();
 
 
         public viwHolder(@NonNull View itemView) {
@@ -175,6 +212,36 @@ public class Places_Adapter extends RecyclerView.Adapter<Places_Adapter.viwHolde
             placephoto=(ImageView)itemView.findViewById(R.id.itemImage);
             card=(CardView) itemView.findViewById(R.id.card0);
             fvrt_btn=(ImageButton)itemView.findViewById(R.id.favrt_btn) ;
+        }
+
+        public void favoriteChecker(final String postKey) {
+
+            fvrt_btn=itemView.findViewById(R.id.favrt_btn);
+
+            fvrtref=firebaseDatabase.getReference("favourites");
+            FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+            final String uid=user.getUid();
+
+            fvrtref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    if (snapshot.child(postKey).hasChild(uid))
+                    {
+                        fvrt_btn.setImageResource(R.drawable.ic_favorite_2);
+                    }
+                    else
+                    {
+                        fvrt_btn.setImageResource(R.drawable.ic_favorite);
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
         }
     }
 }

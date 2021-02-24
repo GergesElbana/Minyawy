@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_80sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/_30sdp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="@dimen/_20sdp"
+    android:id="@+id/notif_card0"
+    >
+    <LinearLayout
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layoutDirection="rtl">
+
+        <ImageView
+            android:id="@+id/notif_itemImage"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:src="@drawable/download"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"/>
+        <LinearLayout
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="@dimen/_49sdp"
+            android:layoutDirection="rtl"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_26sdp"
+                android:id="@+id/notif_text_placeName"
+                android:textSize="20sp"
+                android:text="gggggggg"
+                android:textDirection="rtl"
+                android:textColor="#000"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_20sdp"
+                android:id="@+id/notif_text_placedescrip"
+                android:textSize="15sp"
+                android:text="ggggggggg"
+                android:textDirection="rtl"
+                android:layout_marginStart="@dimen/_10sdp"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -58,8 +58,10 @@
           android:layout_height="@dimen/_29sdp"
           android:id="@+id/favrt_btn"
           android:src="@drawable/ic_favorite"
-
+          android:background="@color/space_transparent"
+          android:padding="@dimen/_2sdp"
           />
+
 
     </LinearLayout>
 

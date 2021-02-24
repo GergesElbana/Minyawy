@@ -6,6 +6,8 @@ public class FetchPlaceName {
   private String descrip;
    private String location;
     private String number;
+    private String photo_1;
+    private String photo_2;
 
     public FetchPlaceName() {
     }
@@ -54,5 +56,21 @@ public class FetchPlaceName {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public String getPhoto_1() {
+        return photo_1;
+    }
+
+    public void setPhoto_1(String photo_1) {
+        this.photo_1 = photo_1;
+    }
+
+    public String getPhoto_2() {
+        return photo_2;
+    }
+
+    public void setPhoto_2(String photo_2) {
+        this.photo_2 = photo_2;
     }
 }

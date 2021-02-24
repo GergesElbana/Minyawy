@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.minyawy.Admin.Admin_SendData;
+import com.example.minyawy.Admin.RestaurantDescriptionAdmin;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,6 +47,8 @@ public class RestaurantDescription extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private    Admin_SendData admin;
     private ArrayList<Admin_SendData> admin_sendDataArrayList;
+    private ImageView menPhoto1,menPhoto2;
+    private DatabaseReference  photoData, photoDataRef_2;
 
     String placnum;
     String plac;
@@ -54,6 +57,9 @@ public class RestaurantDescription extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_description);
         ButterKnife.bind(this);
+
+        menPhoto1=(ImageView)findViewById(R.id.m_image_1);
+        menPhoto2=(ImageView)findViewById(R.id.m_image_2);
 
         String placPhoto=getIntent().getExtras().getString("photo");
         Glide.with(this).load(placPhoto).into(ReataurateImage);
@@ -65,6 +71,50 @@ public class RestaurantDescription extends AppCompatActivity {
         Resturantnumber.setText(plNumber);
         String plLocation=getIntent().getExtras().getString("loc");
         RestaurantLocation.setText(plLocation);
+     /*   String menPhoto_1=getIntent().getExtras().getString("pho_1");
+        Glide.with(this).load(menPhoto_1).into(menPhoto1);*/
+
+        photoData=FirebaseDatabase.getInstance().getReference("menu_photo");
+        photoDataRef_2=FirebaseDatabase.getInstance().getReference("menu_photo_2");
+
+        //to get menu photo_1
+        photoData.child(plName).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+               // for(DataSnapshot data:snapshot.getChildren()){
+                    FetchPlaceName fetchPlaceName=new FetchPlaceName();
+                    // fetchPlaceName.setPhoto_1(data.child("photo_1").getValue().toString());
+                    Glide.with(RestaurantDescription.this).load(fetchPlaceName.getPhoto_1()).into(menPhoto1);
+               // }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //to get menu photo_2
+        photoDataRef_2.child(plName).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                // for(DataSnapshot data:snapshot.getChildren()){
+                FetchPlaceName fetchPlaceName=new FetchPlaceName();
+                // fetchPlaceName.setPhoto_1(data.child("photo_1").getValue().toString());
+                Glide.with(RestaurantDescription.this).load(fetchPlaceName.getPhoto_2()).into(menPhoto2);
+                // }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
 
 
