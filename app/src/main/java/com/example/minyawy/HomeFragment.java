@@ -80,10 +80,10 @@ public class HomeFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
         RecyclerView  PlaceRecycler= (RecyclerView) v.findViewById(R.id.PlaceRecycler) ;
         List<SlideModel> slideModels = new ArrayList<>();
-        slideModels.add(new SlideModel(R.drawable.rest, null));
-        slideModels.add(new SlideModel(R.drawable.rest, null));
+        slideModels.add(new SlideModel(R.drawable.slider, null));
+        slideModels.add(new SlideModel(R.drawable.slider, null));
         ImageSlider Slider=(ImageSlider)v.findViewById(R.id.Slider);
-    Slider.setImageList(slideModels, true);
+        Slider.setImageList(slideModels, true);
 
         ArrayList<Place_Model> place = new ArrayList<>();
         place.add(new Place_Model("Cafe", R.drawable.cafe));

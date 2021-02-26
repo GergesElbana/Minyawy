@@ -7,7 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
-import android.app.Activity;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -19,13 +19,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.minyawy.FetchPlaceName;
 import com.example.minyawy.HomeActivity;
 import com.example.minyawy.PlaceListActivity;
-import com.example.minyawy.PlaceListActivity_ViewBinding;
+
 import com.example.minyawy.Places_Adapter;
 import com.example.minyawy.R;
 import com.example.minyawy.RecyclerAdapter;
@@ -63,12 +64,14 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
    // private String imadeDownload;
     private String photoNum;
     private  String string;
+    ProgressBar prog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_restaurant_description_admin);
-
+        prog=(ProgressBar)findViewById(R.id.progressBar3);
+        prog.setVisibility(View.INVISIBLE);
         // firebaseDatabase=FirebaseDatabase.getInstance();
         //  databaseReference=firebaseDatabase.getReference("Restaurant");
         // id0=databaseReference.push().getKey();
@@ -198,7 +201,7 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
     public void addPhoto_1( Admin_SendData admin_sendData)
     {
 
-       string=placeName.getText().toString();
+       string=placePhone.getText().toString();
                 firebaseDatabase = FirebaseDatabase.getInstance();
                 dataPhoto = firebaseDatabase.getReference("menu_photo");
                 //id0 = databaseReference.push().getKey();
@@ -216,16 +219,16 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
     public void addPhoto_2( Admin_SendData admin_sendData)
     {
 
-        string=placeName.getText().toString();
+        string=placePhone.getText().toString();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        dataPhoto = firebaseDatabase.getReference("menu_photo_2");
+        databaseReference = firebaseDatabase.getReference("menu_photo_2");
         //id0 = databaseReference.push().getKey();
 
-        dataPhoto.child(string).setValue(admin_sendData)
+        databaseReference.child(string).setValue(admin_sendData)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        showMessage("successful photoooooo2222");
+                        showMessage("successful phot2222");
                     }
                 });
 
@@ -255,10 +258,12 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
     }
 
     public void sentDataStorage(Uri uri){
+        prog.setVisibility(View.VISIBLE);
         final String nono = placeName.getText().toString();
         if (!nono.isEmpty() || !placeDescrip.getText().toString().isEmpty() ||
                 !placeLocation.getText().toString().isEmpty() || !placePhone.getText().toString().isEmpty() && uri != null) {
             StorageReference storageReference = FirebaseStorage.getInstance().getReference("photo");
+
             final StorageReference imagePath = storageReference.child(uri.getLastPathSegment());
             imagePath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
@@ -274,8 +279,11 @@ public class RestaurantDescriptionAdmin extends AppCompatActivity {
                                     , placeDescrip.getText().toString(), placeLocation.getText().toString()
                                     , placePhone.getText().toString(), id0);
                             addPosttoDatabase(fetchPlaceName);
-                            Intent nonty = new Intent(RestaurantDescriptionAdmin.this, PlaceListActivity.class);
-                            startActivity(nonty);
+                            Intent nont = new Intent(RestaurantDescriptionAdmin.this, PlaceListActivity.class);
+                            startActivity(nont);
+                            prog.setVisibility(View.INVISIBLE);
+                         
+
 
                         }
                     }).addOnFailureListener(new OnFailureListener() {

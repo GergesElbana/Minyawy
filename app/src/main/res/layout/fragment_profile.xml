@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/_150sdp"
         android:scaleType="centerCrop"
-        android:src="@drawable/rest" />
+        android:src="@drawable/slider" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ProfilePhoto"
@@ -19,8 +19,7 @@
         android:layout_height="@dimen/_80sdp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_110sdp"
-        android:src="@drawable/cafe"
-       />
+        android:src="@drawable/ic_person" />
 
     <TextView
         android:id="@+id/Username"
@@ -29,19 +28,40 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_200sdp"
         android:gravity="center_horizontal"
-        android:text="Name"
+        android:text="UserName"
         android:textColor="#000"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/UserEmail"
+        android:layout_width="match_parent"
+        android:text="Email"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_70sdp"
+        android:layout_marginEnd="@dimen/_70sdp"
+        android:layout_marginTop="@dimen/_230sdp"
+        android:textColor="#000"
+        android:textSize="15sp" />
+
+    <ImageButton
+        android:id="@+id/btn_logout"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_70sdp"
+        android:layout_marginTop="@dimen/_280sdp"
+        android:layout_marginEnd="@dimen/_70sdp"
+        android:src="@drawable/common_full_open_on_phone"
+      />
+
+    <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:textColor="#000"
-        android:textSize="15sp"
-        android:layout_marginTop="@dimen/_230sdp"
-        android:layout_marginStart="@dimen/_70sdp"/>
+        android:textSize="18sp"
+        android:textColor="@color/color"
+        android:layout_marginStart="@dimen/_105sdp"
+        android:layout_marginTop="@dimen/_285sdp"
+        android:text="Log out" />
 
 
     <!--  <LinearLayout

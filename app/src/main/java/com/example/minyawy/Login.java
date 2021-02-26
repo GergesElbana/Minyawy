@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -185,4 +186,28 @@ public class Login extends AppCompatActivity {
         return log_mail;
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        FirebaseUser currentUser = mmAuth.getCurrentUser();
+        updateUI(currentUser);
+    }
+
+
+    private void updateUI(FirebaseUser user) {
+        if (user != null)
+        {
+            // ...
+            if (!user.isEmailVerified())
+            {
+                // do what you want with UI
+
+                Intent intent=new Intent(Login.this, HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+            // ...
+        }
+        // ...
+    }
 }

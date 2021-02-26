@@ -80,7 +80,13 @@ public class NotificationFragment extends Fragment {
         prefRecy.setLayoutManager(linearLayoutManager);
         databaseReference= FirebaseDatabase.getInstance().getReference("favouriteList");
         placesListData=new ArrayList<>();
-        getfirebasedata();
+        if(placesListData!=null){
+        getfirebasedata();}
+        else
+        {
+            Toast.makeText(context, "وه روح اعمل ليك لمكان الاول", Toast.LENGTH_SHORT).show();
+
+        }
         return v;
     }
     private void getfirebasedata(){

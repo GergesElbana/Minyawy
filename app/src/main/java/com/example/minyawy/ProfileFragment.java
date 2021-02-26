@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -46,6 +48,7 @@ public class ProfileFragment extends Fragment {
     private final String users="user";
     private FirebaseAuth mAuth;
     private FirebaseUser currentuser;
+    ImageButton log_out;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -90,19 +93,15 @@ public class ProfileFragment extends Fragment {
          name4=currentuser.getEmail();
         Glide.with(this).load(currentuser.getPhotoUrl()).into(profilePhoto);
 
-       /* Bundle bundle=getArguments();
-        name4=bundle.getString("email");*/
-
-    //    Log.v("ger",name4);
-        //if(this.getArguments() != null){
-           // Bundle bundle=this.getArguments();
-            //name4=bundle.getString("email0");
-          /*  name4 =this.getArguments().getString("email0");
-            Log.v("ger",name4);*/
-       // }else name4="very@gmail.com";*/
-   ////////////////////////////
-     /*   Login activity = (Login) getActivity();
-        name4 =activity.getMyData();*/
+log_out=(ImageButton)v.findViewById(R.id.btn_logout);
+log_out.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        FirebaseAuth.getInstance().signOut();
+        Intent intntLogin=new Intent(getActivity(),Login.class);
+        startActivity(intntLogin);
+    }
+});
 
 
 

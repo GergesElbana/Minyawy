@@ -13,19 +13,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PlacesDescription"></activity>
-        <activity android:name=".SplashActivity" />
-        <activity android:name=".Register_Activity" />
-        <activity android:name=".Login">
+        <activity android:name=".Menues"></activity>
+        <activity
+            android:name=".Splash_Activity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Admin.RestaurantDescriptionAdmin"></activity>
+        <activity android:name=".PlacesDescription" />
+        <activity android:name=".Register_Activity" />
+        <activity android:name=".Login" />
+        <activity android:name=".Admin.RestaurantDescriptionAdmin" />
         <activity android:name=".PlaceListActivity" />
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".HomeActivity" />
         <activity android:name=".RestaurantDescription" />
         <activity android:name=".MainActivity" />
     </application>

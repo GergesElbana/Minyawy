@@ -185,6 +185,7 @@ public class Register_Activity extends AppCompatActivity {
 
                             Intent intent=new Intent(Register_Activity.this, HomeActivity.class);
                             startActivity(intent);
+                            finish();
                         }
 
 

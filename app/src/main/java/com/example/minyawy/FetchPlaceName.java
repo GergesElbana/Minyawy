@@ -18,6 +18,7 @@ public class FetchPlaceName {
         this.descrip = descrip;
     }
 
+
     public String getPhoto() {
         return photo;
     }

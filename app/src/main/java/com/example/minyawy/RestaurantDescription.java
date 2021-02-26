@@ -3,10 +3,12 @@ package com.example.minyawy;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -49,7 +51,7 @@ public class RestaurantDescription extends AppCompatActivity {
     private ArrayList<Admin_SendData> admin_sendDataArrayList;
     private ImageView menPhoto1,menPhoto2;
     private DatabaseReference  photoData, photoDataRef_2;
-
+    FetchPlaceName mm;
     String placnum;
     String plac;
     @Override
@@ -60,6 +62,8 @@ public class RestaurantDescription extends AppCompatActivity {
 
         menPhoto1=(ImageView)findViewById(R.id.m_image_1);
         menPhoto2=(ImageView)findViewById(R.id.m_image_2);
+
+
 
         String placPhoto=getIntent().getExtras().getString("photo");
         Glide.with(this).load(placPhoto).into(ReataurateImage);
@@ -78,15 +82,17 @@ public class RestaurantDescription extends AppCompatActivity {
         photoDataRef_2=FirebaseDatabase.getInstance().getReference("menu_photo_2");
 
         //to get menu photo_1
-        photoData.child(plName).addValueEventListener(new ValueEventListener() {
+        photoData.child(plNumber).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                // for(DataSnapshot data:snapshot.getChildren()){
-                    FetchPlaceName fetchPlaceName=new FetchPlaceName();
+                    //FetchPlaceName fetchPlaceName=new FetchPlaceName();
                     // fetchPlaceName.setPhoto_1(data.child("photo_1").getValue().toString());
+                   FetchPlaceName fetchPlaceName=snapshot.getValue(FetchPlaceName.class);
                     Glide.with(RestaurantDescription.this).load(fetchPlaceName.getPhoto_1()).into(menPhoto1);
                // }
+                Log.v("key",fetchPlaceName.getPhoto_1());
 
             }
 
@@ -97,21 +103,31 @@ public class RestaurantDescription extends AppCompatActivity {
         });
 
         //to get menu photo_2
-        photoDataRef_2.child(plName).addValueEventListener(new ValueEventListener() {
+        photoDataRef_2.child(plNumber).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 // for(DataSnapshot data:snapshot.getChildren()){
-                FetchPlaceName fetchPlaceName=new FetchPlaceName();
-                // fetchPlaceName.setPhoto_1(data.child("photo_1").getValue().toString());
-                Glide.with(RestaurantDescription.this).load(fetchPlaceName.getPhoto_2()).into(menPhoto2);
+               //  fetchPlaceName=new FetchPlaceName();
+                mm=snapshot.getValue(FetchPlaceName.class);
+                Glide.with(RestaurantDescription.this).load(mm.getPhoto_1()).into(menPhoto2);
+               // Log.v("key",mm.getPhoto_1());
                 // }
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(RestaurantDescription.this, "can not load photo", Toast.LENGTH_SHORT).show();
+            }
+        });
+        menPhoto1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(RestaurantDescription.this,Menues.class);
 
+                intent.putExtra("photo",mm.getPhoto());
+                startActivity(intent);
             }
         });
 
